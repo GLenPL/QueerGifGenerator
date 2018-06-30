@@ -22,15 +22,20 @@
 		<section id="principal">
 			<h1>Enjoy !</h1>
 			
-			<p><a href="../pageDeBase.html#canvas" title="Un indice : cliquez ici !">Retour au début ?</a></p>
-			
 			<h2>Le générateur</h2>
 			<canvas id="canvas1" width="1" height="1"></canvas>
 			<br/>
 			<p>Ce générateur utilise <a href="https://www.mathjax.org/#docs">MathJax</a>, <a href="https://antimatter15.com/project/jsgif/">jsgif</a> et <a href="https://jquery.com/">jQuery</a></p>
 			
 			<h2>Quelques explications</h2>
-			<p>Tous les sripts de cette page sont codés en javascript et accesible <a href="">ici</a></p>
+			<p>Tous les sripts de cette page sont codés en javascript et accesible
+			<a href="https://github.com/GLenPL/Queer">ici</a>. Un code dessine toute les 40 millisecondes sur 
+			l'élément central de la page page, donnant une illusion de mouvment. Losrque le bouton ad hoc est utilisé,
+			toutes les frames sont enregistrées une par une (le processus est relativement long et peu facilement
+			prendre plus de 40ms, ce qui explique le ralentissement de l'animation) avant d'être utilisées pour créer 
+			un gif. Celui-ci est alors téléchargé. Tout est fait localement dans le navigateur.</p>
+			<p>Pour les explications à propos des paramètres, il va falloir attendre un joli schéma (et donc beaucoup
+			de motivation de ma part)</p>
 		</section>
 		
 		<aside id="choix">

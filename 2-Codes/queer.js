@@ -103,7 +103,7 @@ window.onload =function(){
 		
 		arrierePlan(rainbow,0);//si quelquechose plante après, il y a au moins un joli arrière-plan
 		
-	var myInterval = setInterval(animate, 50);
+	var myInterval = setInterval(animate, 40);
 	
 	{//On ne récupère les valeurs des variables que lorsqu'elles sont changées, pas à chaque itération
 	elementBGFlag.onchange = function(){
@@ -198,20 +198,20 @@ window.onload =function(){
 	
 	bGif.onclick= function(){//lance l'enregistrement d'un .gif (un tour) avec les parametres actuels (freezés)
 		var speed = elementSpeed.value;
-		frameRestantes = Math.round(2*pi/(0.05*Math.abs(speed)));
+		frameRestantes = Math.round(2*pi/(0.04*Math.abs(speed)));
 		frameTot= frameRestantes;
 		recordGif = true;
 		
 		
 		encoder.setRepeat(0);
-		encoder.setDelay(50);
+		encoder.setDelay(40);
 		encoder.start();
 		
 		console.log('**********');
 		console.log('Lancement de l\'enregistrement d\'un .gif :');
 		console.log('Frequence : 20 Hz');
 		console.log('Nombre de frames : '+frameRestantes);
-		console.log('Durée de la boucle : ' + 0.05*frameRestantes + ' s');
+		console.log('Durée de la boucle : ' + 0.04*frameRestantes + ' s');
 		console.log('Nom du gif : ');
 	}
 	
@@ -225,7 +225,7 @@ window.onload =function(){
 		}
 		
 		{//gestion des constantes sur la frame
-		dtheta = elementSpeed.value*0.05;
+		dtheta = elementSpeed.value*0.04;
 		var eSymb1 = elementEpaisseur.value;
 		var cSymb1 = couleurFunc(angle,typeCouleur1InUse,valCouleur1InUse);
 		var cSymb2 = couleurFunc(angle,typeCouleur2InUse,valCouleur2InUse);
