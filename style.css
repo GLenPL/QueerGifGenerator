@@ -63,6 +63,12 @@ h1{
 	text-align: center;
 	align-items: center;
 }
+#choix .formPart *.titre {
+	padding: 0px;
+	margin:1px;
+	font-size: 1.1em;
+	font-weight:bold;
+}
 #choix{
 	display: flex;
 	flex-direction: column;
@@ -77,7 +83,7 @@ h1{
 	margin: 5px;
 	padding: 5px;
 	
-	transition: opacity 1s;
+	transition: opacity 0.1s;
 }
 #menu a, #menu a:visited{
 	border:1px solid;
@@ -141,7 +147,6 @@ mark{
 a{
 	color: #202060;
 }
-
 table,td{
 	border: 1px black solid;
 	border-collapse: collapse;
@@ -152,24 +157,8 @@ height: 25px;
 text-align: center;
 }
 /* Class et id */
-.essai{
-	text-decoration: underline;	
-}
-.particulier{
-	text-decoration: line-through;
-}
 
-.inline{
-	border: 1px solid;
-	padding: 5px;
-	margin: 5px;
-}
-
-.inline *{
-display: inline;
-}
-
-{
+{/*Quelques id*/
 #id{
 	font-weight: bold;
 	text-decoration: overline;
@@ -194,23 +183,33 @@ display: inline;
 }
 }
 
-{
+{/*Quelques classes*/
+.essai{
+	text-decoration: underline;	
+}
+.particulier{
+	text-decoration: line-through;
+}
+.inline{
+	border: 1px solid;
+	padding: 5px;
+	margin: 5px;
+}
+.inline *{
+display: inline;
+}
 td.veryHigh{
 	background-color:blue;
 }
-
 td.high{
 	background-color:green;
 }
-
 td.medium{
 	background-color:yellow;
 }
-
 td.low{
 	background-color:orange;
 }
-
 td.veryLow{
 	background-color:red;
 }

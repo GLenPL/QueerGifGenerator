@@ -12,44 +12,54 @@ window.onload =function(){
 				return;
 			}
 		
-		var aside = document.getElementById('choix');
-		
 		{//Récupération des éléments HTML
-		var elementBGif = document.getElementById('bGif');
-		var elementNom = document.getElementById('nom');
+		var eChoix = document.getElementById('choix');
 		
-		var elementEpaisseur = document.getElementById('epaisseur');
-		var elementBGFlag = document.getElementById('bgFlag');
+		var eBGif = document.getElementById('bGif');
+		var eNom = document.getElementById('nom');
 		
-		var elementTypeCouleur1 = document.getElementById('typeCouleur1');
-		var elementValCouleur1 = document.getElementById('valCouleur1');
-		var elementDivValCouleur1 = document.getElementById('divValCouleur1');
-		var elementDir1 = document.getElementById('dir1');
-		var elementDirT = document.getElementById('dirT');
-		var elementPhiT = document.getElementById('phiT');
-		var elementPDCentre = document.getElementById('pdCentre');
+		var eEpaisseur = document.getElementById('epaisseur');
+		var eBGFlag = document.getElementById('bgFlag');
 		
-		var elementDivSymb2 = document.getElementById('divSymb2');
-		var elementCbSymb2 = document.getElementById('cbSymb2');
-		var elementTypeCouleur2 = document.getElementById('typeCouleur2');
-		var elementValCouleur2 = document.getElementById('valCouleur2');
-		var elementDivValCouleur2 = document.getElementById('divValCouleur2');
-		var elementDir2 = document.getElementById('dir2');
-		var elementPhi2 = document.getElementById('phi2');
 		
-		var elementSpeed = document.getElementById('speed');
+		var eImgPara = document.getElementById('imgPara');
+		var eDivPara = document.getElementById('divPara');
+		var eRCercle = document.getElementById('rCercle');
+		var eLBarre = document.getElementById('lBarre');
+		var eAFleche = document.getElementById('aFleche');
+		var ePFleche = document.getElementById('pFleche');
+		var ePDCroix = document.getElementById('pdCroix');
+		var ePCroix = document.getElementById('pCroix');
+		
+		var eTypeCouleur1 = document.getElementById('typeCouleur1');
+		var eValCouleur1 = document.getElementById('valCouleur1');
+		var eDivValCouleur1 = document.getElementById('divValCouleur1');
+		var eDir1 = document.getElementById('dir1');
+		var eDirT = document.getElementById('dirT');
+		var ePhiT = document.getElementById('phiT');
+		var ePDCentre = document.getElementById('pdCentre');
+		
+		var eDivSymb2 = document.getElementById('divSymb2');
+		var eCbSymb2 = document.getElementById('cbSymb2');
+		var eTypeCouleur2 = document.getElementById('typeCouleur2');
+		var eValCouleur2 = document.getElementById('valCouleur2');
+		var eDivValCouleur2 = document.getElementById('divValCouleur2');
+		var eDir2 = document.getElementById('dir2');
+		var ePhi2 = document.getElementById('phi2');
+		
+		var eSpeed = document.getElementById('speed');
 		var timeExe = document.getElementById('timeExe');
-		var elementTestText = document.getElementById('testText');
+		
+		var eTestText = document.getElementById('testText');
+		var eTestInput = document.getElementById('testInput');
 		
 		var info = document.getElementById('info');
 		var dChoix = document.getElementById('choix');
 		var chargement = $('#chargement');
 		}
 		
-		canvas.width = 500;
-		canvas.height = 360;
-		
-		
+		{//toutes les constantes et variables uilisées
+		{//constantes du drapeau/arrière-plan
 		var rainbow = ['red','orange','gold','green','blue','purple'];
 		var trans1 = ['lightSkyBlue','pink','white','pink','lightSkyBlue'];
 		var trans2 = ['magenta','orchid','mediumOrchid','darkOrchid','blue'];
@@ -57,34 +67,39 @@ window.onload =function(){
 		var bi = ['mediumVioletRed','mediumVioletRed','mediumOrchid','blue','blue'];
 		
 		var flagInUse = rainbow;
+		}
 		
 		{//contantes et variables des symboles
-		var angle = 0;
-		var pi = Math.PI;
-		var cy = canvas.height/2;
-		var cx = canvas.width/2;
-		var dtheta = 1;
-		var rCercle = 40;
-		var lBarre = 100;
-		var aFleche = 7*pi/12;
-		var pFleche = 0.5;
-		var pdCroix = 0.5;
-		var pCroix = 0.45;
-		var kx = 0;
-		var ky = 0;
+		//A prpos des input restants à ajouter :
+		var angle = 0;//fini
+		var pi = Math.PI;//fini
+		canvas.width = 500;//à ajouter					<----
+		canvas.height = 360;//à ajouter					<----
 		
-		var typeCouleur1InUse = 'rand';
-		var valCouleur1InUse = null;
-		var sensDir1 = true;
-		var sensDirT = false;
-		var phiT = elementPhiT.value;
-		var pdCentre = 1/3;
+		var paraVisible = false;
+		var cy = canvas.height/2;//lié à un autre
+		var cx = canvas.width/2;//lié à un autre
+		var dtheta = 1;//fini
+		var rCercle = 40;//fini
+		var lBarre = 100;//fini
+		var aFleche = 7*pi/12;//fini
+		var pFleche = 0.5;//fini
+		var pdCroix = 0.5;//à ajouter					<----
+		var pCroix = 0.45;//à ajouter					<----
 		
-		var symb2Exists = elementCbSymb2.checked;
+		var typeCouleur1InUse = 'rand';//déjà mis
+		var valCouleur1InUse = null;//déjà mis
+		var sensDir1 = true;//déjà mis
+		var sensDirT = false;//déjà mis
+		var phiT = ePhiT.value;//déjà mis
+		var pdCentre = 1/3;//déjà mis
+		var pEspacement = 1.5;//à ajouter				<----
+		
+		var symb2Exists = eCbSymb2.checked;
 		var typeCouleur2InUse = 'rand';
 		var valCouleur2InUse = null;
 		var sensDir2 = false;
-		var phi2 = elementPhi2.value;
+		var phi2 = 0;
 		}
 		
 		{//constantes et variables du temps
@@ -100,14 +115,14 @@ window.onload =function(){
 		var encoder = new GIFEncoder();
 		var msgCount = 0;
 		}
-		
+		}
 		arrierePlan(rainbow,0);//si quelquechose plante après, il y a au moins un joli arrière-plan
 		
-	var myInterval = setInterval(animate, 40);
+	var myInterval = setInterval(animate, 30);
 	
 	{//On ne récupère les valeurs des variables que lorsqu'elles sont changées, pas à chaque itération
-	elementBGFlag.onchange = function(){
-		switch(elementBGFlag.value){
+	eBGFlag.onchange = function(){
+		switch(eBGFlag.value){
 			case 'rainbowAns':
 				flagInUse = rainbow;
 				break;
@@ -131,87 +146,132 @@ window.onload =function(){
 		}
 	}
 	
-	elementTypeCouleur1.onchange = function(){
-		typeCouleur1InUse = elementTypeCouleur1.value;
-		if (elementTypeCouleur1.value == 'col'){
-			valCouleur1InUse = elementValCouleur1.value;
-			elementValCouleur1.disabled = false;
-			elementDivValCouleur1.style.display = '';
+	eRCercle.onchange = function(){
+		rCercle = parseInt(eRCercle.value);
+	}
+	
+	eLBarre.onchange = function(){
+		lBarre = parseInt(eLBarre.value);
+	}
+	
+	eAFleche.onchange = function(){
+		aFleche = parseFloat(eAFleche.value);
+	}
+	
+	ePDCroix.onchange = function(){
+		pdCroix = parseFloat(ePDCroix.value);
+	}
+	
+	ePCroix.onchange = function(){
+		pCroix = parseFloat(ePCroix.value);
+	}
+	
+	ePFleche.onchange = function(){
+		pFleche = parseFloat(ePFleche.value);
+	}
+	
+	eTypeCouleur1.onchange = function(){
+		typeCouleur1InUse = eTypeCouleur1.value;
+		if (eTypeCouleur1.value == 'col'){
+			valCouleur1InUse = eValCouleur1.value;
+			eValCouleur1.disabled = false;
+			eDivValCouleur1.style.display = '';
 		}
 		else{
-			elementValCouleur1.disabled = true;
-			elementDivValCouleur1.style.display = 'none';
+			eValCouleur1.disabled = true;
+			eDivValCouleur1.style.display = 'none';
 		}
 	}
 	
-	elementValCouleur1.onchange = function(){
-		valCouleur1InUse = elementValCouleur.value;
+	eValCouleur1.onchange = function(){
+		valCouleur1InUse = eValCouleur1.value;
 	}
 	
-	elementDir1.onchange = function(){
-		sensDir1 = elementDir1.checked;
+	eDir1.onchange = function(){
+		sensDir1 = eDir1.checked;
 	}
 	
-	elementDirT.onchange = function(){
-		sensDirT = !elementDirT.checked;
+	eDirT.onchange = function(){
+		sensDirT = !eDirT.checked;
 	}
 	
-	elementCbSymb2.onchange = function(){
-		symb2Exists = elementCbSymb2.checked;
-		if (symb2Exists){elementDivSymb2.style.display = '';}
-		else{elementDivSymb2.style.display = 'none';}
+	eCbSymb2.onchange = function(){
+		symb2Exists = eCbSymb2.checked;
+		if (symb2Exists){eDivSymb2.style.display = '';}
+		else{eDivSymb2.style.display = 'none';}
 	}
 	
-	elementTypeCouleur2.onchange = function(){
-		typeCouleur2InUse = elementTypeCouleur2.value;
-		if (elementTypeCouleur2.value == 'col'){
-			valCouleur2InUse = elementValCouleur2.value;
-			elementValCouleur2.disabled = false;
-			elementDivValCouleur2.style.display = '';
+	eTypeCouleur2.onchange = function(){
+		typeCouleur2InUse = eTypeCouleur2.value;
+		if (eTypeCouleur2.value == 'col'){
+			valCouleur2InUse = eValCouleur2.value;
+			eValCouleur2.disabled = false;
+			eDivValCouleur2.style.display = '';
 		}
 		else{
-			elementValCouleur2.disabled = true;
-			elementDivValCouleur2.style.display = 'none';
+			eValCouleur2.disabled = true;
+			eDivValCouleur2.style.display = 'none';
 		}
 	}
 	
-	elementValCouleur2.onchange = function(){
-		valCouleur2InUse = elementValCouleur.value;
+	eValCouleur2.onchange = function(){
+		valCouleur2InUse = eValCouleur2.value;
 	}
 	
-	elementDir2.onchange = function(){
-		sensDir2 = elementDir2.checked;
+	eDir2.onchange = function(){
+		sensDir2 = eDir2.checked;
 	}
 	
-	elementPhi2.onchange = function(){
-		phi2 = elementPhi2.value*1;
+	ePhi2.onchange = function(){
+		phi2 = ePhi2.value*1;
 	}
 	
-	elementPhiT.onchange = function(){
-		phiT = elementPhiT.value*1;
+	ePhiT.onchange = function(){
+		phiT = ePhiT.value*1;
 	}
 	
-	elementPDCentre.onchange = function(){
-		pdCentre = elementPDCentre.value*1;
+	ePDCentre.onchange = function(){
+		pdCentre = ePDCentre.value*1;
 	}
+	}
+	
+	eTestInput.onclick = function(){
+	}
+	
+	eImgPara.onclick = function(){
+		paraVisible = !paraVisible;
+		
+		if(paraVisible){
+			eImgPara.src = "../0-Contenus/FlecheBas.png";
+			eImgPara.alt = "v"
+			eDivPara.style.display = '';
+		}
+		else{
+			eImgPara.src = "../0-Contenus/FlecheDroite.png";
+			eImgPara.alt = ">"
+			eDivPara.style.display = 'none';
+		}
 	}
 	
 	bGif.onclick= function(){//lance l'enregistrement d'un .gif (un tour) avec les parametres actuels (freezés)
-		var speed = elementSpeed.value;
-		frameRestantes = Math.round(2*pi/(0.04*Math.abs(speed)));
+		var speed = eSpeed.value;
+		frameRestantes = Math.round(2*pi/(0.030*Math.abs(speed)));
 		frameTot= frameRestantes;
 		recordGif = true;
+		if (speed == 0){frameRestantes = 1;}
 		
 		
 		encoder.setRepeat(0);
-		encoder.setDelay(40);
+		encoder.setDelay(30);
 		encoder.start();
+		
+		eChoix.style.opacity = 0;
 		
 		console.log('**********');
 		console.log('Lancement de l\'enregistrement d\'un .gif :');
 		console.log('Frequence : 20 Hz');
 		console.log('Nombre de frames : '+frameRestantes);
-		console.log('Durée de la boucle : ' + 0.04*frameRestantes + ' s');
+		console.log('Durée de la boucle : ' + 0.030*frameRestantes + ' s');
 		console.log('Nom du gif : ');
 	}
 	
@@ -225,27 +285,34 @@ window.onload =function(){
 		}
 		
 		{//gestion des constantes sur la frame
-		dtheta = elementSpeed.value*0.04;
-		var eSymb1 = elementEpaisseur.value;
+		dtheta = eSpeed.value*0.030;
+		var eSymb1 = eEpaisseur.value;
 		var cSymb1 = couleurFunc(angle,typeCouleur1InUse,valCouleur1InUse);
 		var cSymb2 = couleurFunc(angle,typeCouleur2InUse,valCouleur2InUse);
 		
 		context.lineJoin = 'bevel';
 		}
 		
-		//gestion des éléments constants (cercle et barre)
+		{//desssin de la frame
 		arrierePlan(flagInUse,angle);
 		
 		if (symb2Exists){
-			symbole(cx+Math.sin(dir(sensDirT,angle)+phiT)*rCercle*(1-pdCentre)*1.6,cy-Math.cos(dir(sensDirT,angle)+phiT)*rCercle*(1-pdCentre)*1.6,dir(sensDir2,angle+phi2),context,eSymb1,cSymb2,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix)
+			var cx2 = cx+Math.sin(dir(sensDirT,angle+phiT))*rCercle*(1-pdCentre)*pEspacement;
+			var cy2 = cy-Math.cos(dir(sensDirT,angle+phiT))*rCercle*(1-pdCentre)*pEspacement;
+			var angle2 = dir(sensDir2,angle+phi2);
+			symbole(cx2,cy2,angle2,context,eSymb1,cSymb2,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix)
 		}
-		symbole(cx-Math.sin(dir(sensDirT,angle)+phiT)*rCercle*pdCentre*1.6,cy+Math.cos(dir(sensDirT,angle)+phiT)*rCercle*pdCentre*1.6,dir(sensDir1,angle),context,eSymb1,cSymb1,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix);
+		var cx1 = cx-Math.sin(dir(sensDirT,angle+phiT))*rCercle*(pdCentre)*pEspacement;
+		var cy1 = cy+Math.cos(dir(sensDirT,angle+phiT))*rCercle*(pdCentre)*pEspacement;
+		var angle1 = dir(sensDir1,angle);
+		symbole(cx1,cy1,angle1,context,eSymb1,cSymb1,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix);
+		}
 		
 		{//gestion de l'enregistrement du gif
 		if (frameRestantes > 0){
 			encoder.addFrame(context);
 			frameRestantes --;
-			elementTestText.innerHTML = frameRestantes;
+			eTestText.innerHTML = frameRestantes;
 			
 			var msg = 'Frame '+(frameTot-frameRestantes)+'/'+frameTot;
 			infoMessage(msg,2000,true,frameTot-frameRestantes,frameTot);
@@ -253,8 +320,9 @@ window.onload =function(){
 		
 		if (frameRestantes == 0 & recordGif){
 			recordGif = false;
+			eChoix.style.opacity = 1;
 			encoder.finish();
-			encoder.download(elementNom.value+'.gif');
+			encoder.download(eNom.value+'.gif');
 			
 			console.log('*********');
 			console.log('Le gif a bien été enregistré et téléchargé.');

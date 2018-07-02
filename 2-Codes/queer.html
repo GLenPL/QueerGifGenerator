@@ -41,107 +41,134 @@
 		<aside id="choix">
 					
 					
-					<div class="formPart"><!-- Gif -->
-					<label for="nom">Nom du gif :</label>
+			<div class="formPart"><!-- Gif -->
+			<label for="nom">Nom du gif :</label>
+			<br/>
+			<input type="text" name="nom" id="nom" value="myBestGif" />
+			<br/>
+			<input type="button" value="Lancez l'enregistrement !" id="bGif" name="bGif"/>
+			</div>
+			
+			<div class="formPart"><!-- Vitesse de rotation -->
+			<label for="speed" title="En rad/s"> Vitesse de rotation : </label>
+			<br/>
+			<input type="number" name="speed" id="speed" min="-5" max="5" step="0.05" value="1"/>
+			</div>
+			
+			<div class="formPart"><!-- Drapeau d'arriere-plan -->
+			<label for="bgFlag">Drapeau d'arrière-plan :</label>
+			<br/>
+			<select id="bgFlag">
+				<option value="rainbowAns">Rainbow</option>
+				<option value="trans1Ans">Transgender Pride</option>
+				<option value="trans2Ans">Trans (bis)</option>
+				<option value="panAns">Pan</option>
+				<option value="biAns">Bi</option>
+				<option value="animatedRainbowAns">Arc-en-ciel animé</option>
+			</select>
+			</div>
+			
+			<div class="formPart"><!-- Premier symbole -->
+				<p class="titre">Premier symbole</p>
+				<label for="typeCouleur2">Couleur : </label>
+				<br/>
+				<select id="typeCouleur1">
+					<option value="rand">(Pseudo-)aléatoire</option>
+					<option value="col">Constante</option>
+					<option value="rainbow">Arc-en-ciel</option>
+					<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
+				</select>
+				<br/>
+				<div id="divValCouleur1" style="display:none">
+					<label for="valCouleur1">Valeur : </label>
+					<input type="color" name="valCouleur" id="valCouleur1" disabled="true" value="#ffc0cb"/>
+				</div>
+				<br/>
+				<label for="dir1">Sens direct (barre): </label>
+				<input type="checkbox" id="dir1" name="dir1" checked/>
+				<br/>
+				<br/>
+				<label for="dirT">Sens indirect (cercle): </label>
+				<input type="checkbox" id="dirT" name="dirT" checked/>
+				<br/>
+				<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
+				<br/>
+				<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
+				<br/>
+				<label for="pdCentre">Décentrage \(\alpha\): </label>
+				<br/>
+				<input type="number" id="pdCentre" name="pdCentre" min="0" max="1" step="0.01" value="0.33"/>
+			</div>
+			
+			<div class="formPart"><!-- Deuxième symbole -->
+				<label for="cbSymb2" class="titre">Deuxième symbole</label>
+				<input type="checkbox" name="cbSymb2" id="cbSymb2" checked/>
+				<br/>
+				<div id="divSymb2">
+					<label for="typeCouleur2">Couleur : </label>
 					<br/>
-					<input type="text" name="nom" id="nom" value="myBestGif" />
-					<br/>
-					<input type="button" value="Lancez l'enregistrement !" id="bGif" name="bGif"/>
-					</div>
-					
-					<div class="formPart"><!-- Drapeau d'arriere-plan -->
-					<label for="bgFlag">Drapeau d'arrière-plan :</label>
-					<br/>
-					<select id="bgFlag">
-						<option value="rainbowAns">Rainbow</option>
-						<option value="trans1Ans">Transgender Pride</option>
-						<option value="trans2Ans">Trans (bis)</option>
-						<option value="panAns">Pan</option>
-						<option value="biAns">Bi</option>
-						<option value="animatedRainbowAns">Arc-en-ciel animé</option>
+					<select id="typeCouleur2">
+						<option value="rand">(Pseudo-)aléatoire</option>
+						<option value="col">Constante</option>
+						<option value="rainbow">Arc-en-ciel</option>
+						<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
 					</select>
-					</div>
-					
-					<div class="formPart"><!-- Premier symbole -->
-						<label>Premier symbole</label>
-						<br/>
-						<label for="typeCouleur2">Couleur : </label>
-						<br/>
-						<select id="typeCouleur1">
-							<option value="rand">(Pseudo-)aléatoire</option>
-							<option value="col">Constante</option>
-							<option value="rainbow">Arc-en-ciel</option>
-							<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
-						</select>
-						<br/>
-						<div id="divValCouleur1" style="display:none">
-							<label for="valCouleur1">Valeur : </label>
-							<input type="color" name="valCouleur" id="valCouleur1" disabled="true" value="#ffc0cb"/>
-						</div>
-						<br/>
-						<label for="dir1">Sens direct (barre): </label>
-						<input type="checkbox" id="dir1" name="dir1" checked/>
-						<br/>
-						<br/>
-						<label for="dirT">Sens indirect (cercle): </label>
-						<input type="checkbox" id="dirT" name="dirT" checked/>
-						<br/>
-						<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
-						<br/>
-						<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
-						<br/>
-						<label for="pdCentre">Décentrage \(\alpha\): </label>
-						<br/>
-						<input type="number" id="pdCentre" name="pdCentre" min="0" max="1" step="0.01" value="0.33"/>
-					</div>
-					
-					<div class="formPart"><!-- Deuxième symbole -->
-						<input type="checkbox" name="cbSymb2" id="cbSymb2" checked/>
-						<label for="cbSymb2">Deuxième symbole</label>
-						<br/>
-						<div id="divSymb2">
-							<label for="typeCouleur2">Couleur : </label>
-							<br/>
-							<select id="typeCouleur2">
-								<option value="rand">(Pseudo-)aléatoire</option>
-								<option value="col">Constante</option>
-								<option value="rainbow">Arc-en-ciel</option>
-								<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
-							</select>
-							<br/>
-							<div id="divValCouleur2" style="display:none">
-								<label for="valCouleur2">Valeur : </label>
-								<input type="color" name="valCouleur" id="valCouleur2" disabled="true" value="#ffc0cb"/>
-							</div>
-							<br/>
-							<label for="dir2">Sens direct : </label>
-							<input type="checkbox" id="dir2" name="dir2"/>
-							<br/>
-							<label for="phi2" title="En rad, par rapport au premier">Déphasage relatif : </label>
-							<br/>
-							<input type="number" id="phi2" name="phi2" min="0" max="6.28" step="0.01" value="0">
-							
-							
-						</div>
-					</div>
-					
-					<div class="formPart"><!-- Epaisseur des traits -->
-					<label for="couleur" title="En pixels">Epaisseur des traits: </label>
 					<br/>
-					<input type="number" name="epaisseur" id="epaisseur" value="10"/>
+					<div id="divValCouleur2" style="display:none">
+						<label for="valCouleur2">Valeur : </label>
+						<input type="color" name="valCouleur" id="valCouleur2" disabled="true" value="#ffc0cb"/>
 					</div>
-					
-					<div class="formPart"><!-- Vitesse de rotation -->
-					<label for="speed" title="En rad/s"> Vitesse de rotation : </label>
 					<br/>
-					<input type="number" name="speed" id="speed" min="-5" max="5" step="0.05" value="1"/>
-					</div>
-					
-					<div class="formPart" style="display:none">
-						<p id="testText"></p>
-					</div>
-					
-				<p id="timeExe" title="Normalement 50 ms"></p>
+					<label for="dir2">Sens direct : </label>
+					<input type="checkbox" id="dir2" name="dir2"/>
+					<br/>
+					<label for="phi2" title="En rad, par rapport au premier">Déphasage : </label>
+					<br/>
+					<input type="number" id="phi2" name="phi2" min="0" max="6.28" step="0.01" value="0">
+				</div>
+			</div>
+			
+			<div class="formPart"><!-- Caractéristiques des symboles -->
+				<p class="titre">
+				<img id="imgPara" src="../0-Contenus/FlecheDroite.png" alt=">"/>
+				Paramètres des symboles</p>
+				<div id="divPara" style="display:none;">
+					<label for="epaisseur" title="En px">Epaisseur des traits : </label>
+					<br/>
+					<input type="number" name="epaisseur" id="epaisseur" value="10" min="1" max="50"/>
+					<br/>
+					<label for="rCercle" title="En px ">Rayon des cercles :</label>
+					<br/>
+					<input type="number" id="rCercle" name="rCercle" value="40" min="0" max="60"/>
+					<br/>
+					<label for="lBarre" title="En px">Longueur des barres :</label>
+					<br/>
+					<input type="number" id="lBarre" name="lBarre" value="100" min="0" max="150"/>
+					<br/>
+					<label for="aFleche" title="En rad">Angle des flèches :</label>
+					<br/>
+					<input type="number" id="aFleche" name="aFleche" value="1.83" min="0" max="3.14" step="0.01"/>
+					<br/>
+					<label for="pFleche" title="En % de la taille de la barre">Taille des flèches :</label>
+					<br/>
+					<input type="number" id="pFleche" name="pFleche" value="0.5" min="0" max="1" step="0.01"/>
+					<br/>
+					<label for="pdCroix" title="En % de la taille de la barre">Hauteur des croix :</label>
+					<br/>
+					<input type="number" id="pdCroix" name="pdCroix" value="0.5" min="0" max="1" step="0.01"/>
+					<br/>
+					<label for="pCroix" title="En % de la taille de la barre">Largeur des croix :</label>
+					<br/>
+					<input type="number" id="pCroix" name="pCroix" value="0.5" min="0" max="1" step="0.01"/>
+				</div>
+			</div>
+			
+			<div class="formPart" style="display:none;"><!-- Normalement pas utilisé -->
+				<p id="testText"></p>
+				<input type="button" value="Click me !" id="testInput"/>
+			</div>
+			
+			<p id="timeExe" title="Normalement 30 ms"></p>
 		</aside>
 			
 		<div id="info">
