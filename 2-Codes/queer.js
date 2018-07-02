@@ -1,4 +1,4 @@
-window.onload =function(){
+ï»¿window.onload =function(){
 							
 		var canvas = document.getElementById("canvas1");
 			if(!canvas){
@@ -8,11 +8,11 @@ window.onload =function(){
 
 		var context = canvas.getContext('2d');
 			if(!context){
-				alert("Impossible de récupérer le context du canvas");
+				alert("Impossible de rÃ©cupÃ©rer le context du canvas");
 				return;
 			}
 		
-		{//Récupération des éléments HTML
+		{//RÃ©cupÃ©ration des Ã©lÃ©ments HTML
 		var eChoix = document.getElementById('choix');
 		
 		var eBGif = document.getElementById('bGif');
@@ -58,8 +58,8 @@ window.onload =function(){
 		var chargement = $('#chargement');
 		}
 		
-		{//toutes les constantes et variables uilisées
-		{//constantes du drapeau/arrière-plan
+		{//toutes les constantes et variables uilisÃ©es
+		{//constantes du drapeau/arriÃ¨re-plan
 		var rainbow = ['red','orange','gold','green','blue','purple'];
 		var trans1 = ['lightSkyBlue','pink','white','pink','lightSkyBlue'];
 		var trans2 = ['magenta','orchid','mediumOrchid','darkOrchid','blue'];
@@ -70,30 +70,32 @@ window.onload =function(){
 		}
 		
 		{//contantes et variables des symboles
-		//A prpos des input restants à ajouter :
+		//A prpos des input restants Ã  ajouter :
 		var angle = 0;//fini
 		var pi = Math.PI;//fini
-		canvas.width = 500;//à ajouter					<----
-		canvas.height = 360;//à ajouter					<----
+		canvas.width = 500;//Ã  ajouter					<----
+		canvas.height = 360;//Ã  ajouter					<----
+		var cy = canvas.height/2;//liÃ© Ã  un autre
+		var cx = canvas.width/2;//liÃ© Ã  un autre
 		
 		var paraVisible = false;
-		var cy = canvas.height/2;//lié à un autre
-		var cx = canvas.width/2;//lié à un autre
 		var dtheta = 1;//fini
 		var rCercle = 40;//fini
 		var lBarre = 100;//fini
 		var aFleche = 7*pi/12;//fini
 		var pFleche = 0.5;//fini
-		var pdCroix = 0.5;//à ajouter					<----
-		var pCroix = 0.45;//à ajouter					<----
+		var pdCroix = 0.5;//fini
+		var pCroix = 0.45;//fini
 		
-		var typeCouleur1InUse = 'rand';//déjà mis
-		var valCouleur1InUse = null;//déjà mis
-		var sensDir1 = true;//déjà mis
-		var sensDirT = false;//déjà mis
-		var phiT = ePhiT.value;//déjà mis
-		var pdCentre = 1/3;//déjà mis
-		var pEspacement = 1.5;//à ajouter				<----
+		var posiVisible = true;
+		var sensDirT = true;//fini, Ã  rÃ©arranger
+		var phiT = ePhiT.value;//fini, Ã  rÃ©arranger
+		var pdCentre = 1/3;//fini, Ã  rÃ©arranger
+		var pEspacement = 1.5;//Ã  ajouter				<----
+		
+		var typeCouleur1InUse = 'rand';//fini
+		var valCouleur1InUse = null;//fini
+		var sensDir1 = true;//fini
 		
 		var symb2Exists = eCbSymb2.checked;
 		var typeCouleur2InUse = 'rand';
@@ -116,11 +118,11 @@ window.onload =function(){
 		var msgCount = 0;
 		}
 		}
-		arrierePlan(rainbow,0);//si quelquechose plante après, il y a au moins un joli arrière-plan
+		arrierePlan(rainbow,0);//si quelquechose plante aprÃ¨s, il y a au moins un joli arriÃ¨re-plan
 		
 	var myInterval = setInterval(animate, 30);
 	
-	{//On ne récupère les valeurs des variables que lorsqu'elles sont changées, pas à chaque itération
+	{//On ne rÃ©cupÃ¨re les valeurs des variables que lorsqu'elles sont changÃ©es, pas Ã  chaque itÃ©ration
 	eBGFlag.onchange = function(){
 		switch(eBGFlag.value){
 			case 'rainbowAns':
@@ -253,7 +255,7 @@ window.onload =function(){
 		}
 	}
 	
-	bGif.onclick= function(){//lance l'enregistrement d'un .gif (un tour) avec les parametres actuels (freezés)
+	bGif.onclick= function(){//lance l'enregistrement d'un .gif (un tour) avec les parametres actuels (freezÃ©s)
 		var speed = eSpeed.value;
 		frameRestantes = Math.round(2*pi/(0.030*Math.abs(speed)));
 		frameTot= frameRestantes;
@@ -271,14 +273,14 @@ window.onload =function(){
 		console.log('Lancement de l\'enregistrement d\'un .gif :');
 		console.log('Frequence : 20 Hz');
 		console.log('Nombre de frames : '+frameRestantes);
-		console.log('Durée de la boucle : ' + 0.030*frameRestantes + ' s');
+		console.log('DurÃ©e de la boucle : ' + 0.030*frameRestantes + ' s');
 		console.log('Nom du gif : ');
 	}
 	
-	function animate(){//fonction principale gérant le dessin sur le canvas et l'enregistrement du gif si demandé
+	function animate(){//fonction principale gÃ©rant le dessin sur le canvas et l'enregistrement du gif si demandÃ©
 		{//timer & affichage du temps
 		temps = timeNew.getTime() - timeOld.getTime();
-		timeExe.innerHTML = 'Temps d\'éxecution : ' + temps + 'ms';
+		timeExe.innerHTML = 'Temps d\'Ã©xecution : ' + temps + 'ms';
 		
 		timeOld = timeNew;
 		timeNew = new Date();
@@ -297,13 +299,13 @@ window.onload =function(){
 		arrierePlan(flagInUse,angle);
 		
 		if (symb2Exists){
-			var cx2 = cx+Math.sin(dir(sensDirT,angle+phiT))*rCercle*(1-pdCentre)*pEspacement;
-			var cy2 = cy-Math.cos(dir(sensDirT,angle+phiT))*rCercle*(1-pdCentre)*pEspacement;
+			var cx2 = cx+Math.sin(dir(sensDirT,angle-phiT))*rCercle*(1-pdCentre)*pEspacement;
+			var cy2 = cy-Math.cos(dir(sensDirT,angle-phiT))*rCercle*(1-pdCentre)*pEspacement;
 			var angle2 = dir(sensDir2,angle+phi2);
 			symbole(cx2,cy2,angle2,context,eSymb1,cSymb2,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix)
 		}
-		var cx1 = cx-Math.sin(dir(sensDirT,angle+phiT))*rCercle*(pdCentre)*pEspacement;
-		var cy1 = cy+Math.cos(dir(sensDirT,angle+phiT))*rCercle*(pdCentre)*pEspacement;
+		var cx1 = cx-Math.sin(dir(sensDirT,angle-phiT))*rCercle*(pdCentre)*pEspacement;
+		var cy1 = cy+Math.cos(dir(sensDirT,angle-phiT))*rCercle*(pdCentre)*pEspacement;
 		var angle1 = dir(sensDir1,angle);
 		symbole(cx1,cy1,angle1,context,eSymb1,cSymb1,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix);
 		}
@@ -325,8 +327,8 @@ window.onload =function(){
 			encoder.download(eNom.value+'.gif');
 			
 			console.log('*********');
-			console.log('Le gif a bien été enregistré et téléchargé.');
-			infoMessage('Enregistrement terminé !',2000,false,null,null);
+			console.log('Le gif a bien Ã©tÃ© enregistrÃ© et tÃ©lÃ©chargÃ©.');
+			infoMessage('Enregistrement terminÃ© !',2000,false,null,null);
 		}
 		}
 		
@@ -404,7 +406,7 @@ window.onload =function(){
 		}
 	}
 	
-	function couleurFunc(theta,type,couleur){//une simple famille de fonctions 2pi-périodiques de R dans le colorspace
+	function couleurFunc(theta,type,couleur){//une simple famille de fonctions 2pi-pÃ©riodiques de R dans le colorspace
 		switch (type){
 			case 'rand':
 				var r = Math.floor((Math.sin(5*theta)+Math.sin(theta)+2)*64);

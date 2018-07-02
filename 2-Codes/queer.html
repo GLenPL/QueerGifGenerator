@@ -1,14 +1,18 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html>
 
 	<head>
+		<meta charset="UTF-8">
+		
 		<title>Colorful Queer</title>
+		
 		<link rel="stylesheet" href="../style.css"/>
 		
+		<!--jQuery-->
 		<script src="http://code.jquery.com/jquery.js" ></script>
-		
+		<!--MathJax-->
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-		
+		<!--jsgif, by antimatter15-->
 		<script type="text/javascript" src="../1-Modules/LZWEncoder.js"></script>
 		<script type="text/javascript" src="../1-Modules/NeuQuant.js"></script>
 		<script type="text/javascript" src="../1-Modules/GIFEncoder.js"></script>
@@ -22,20 +26,22 @@
 		<section id="principal">
 			<h1>Enjoy !</h1>
 			
-			<h2>Le générateur</h2>
+			<h2>Le gÃ©nÃ©rateur</h2>
 			<canvas id="canvas1" width="1" height="1"></canvas>
 			<br/>
-			<p>Ce générateur utilise <a href="https://www.mathjax.org/#docs">MathJax</a>, <a href="https://antimatter15.com/project/jsgif/">jsgif</a> et <a href="https://jquery.com/">jQuery</a></p>
+			<p>Ce gÃ©nÃ©rateur utilise <a href="https://www.mathjax.org/#docs">MathJax</a>, <a href="https://antimatter15.com/project/jsgif/">jsgif</a> et <a href="https://jquery.com/">jQuery</a></p>
 			
 			<h2>Quelques explications</h2>
-			<p>Tous les sripts de cette page sont codés en javascript et accesible
+			<p>Tous les sripts de cette page sont codÃ©s en javascript et accesible
 			<a href="https://github.com/GLenPL/Queer">ici</a>. Un code dessine toute les 40 millisecondes sur 
-			l'élément central de la page page, donnant une illusion de mouvment. Losrque le bouton ad hoc est utilisé,
-			toutes les frames sont enregistrées une par une (le processus est relativement long et peu facilement
-			prendre plus de 40ms, ce qui explique le ralentissement de l'animation) avant d'être utilisées pour créer 
-			un gif. Celui-ci est alors téléchargé. Tout est fait localement dans le navigateur.</p>
-			<p>Pour les explications à propos des paramètres, il va falloir attendre un joli schéma (et donc beaucoup
-			de motivation de ma part)</p>
+			l'Ã©lÃ©ment central de la page page, donnant une illusion de mouvment. Losrque le bouton ad hoc est utilisÃ©
+			toutes les frames sont enregistrÃ©es une par une (le processus est relativement long et peu facilement
+			prendre plus de 40ms, ce qui explique le ralentissement de l'animation) avant d'Ãªtre utilisÃ©es pour crÃ©er 
+			un gif. Celui-ci est alors tÃ©lÃ©chargÃ©. Tout est fait localement dans le navigateur.</p>
+			<p>Pour les explications Ã  propos des paramÃ¨tres, il va falloir attendre un joli schÃ©ma (et donc beaucoup
+			de motivation de ma part). On note toutefois que seuls le rayon du cercle et la taille de la barre sont
+			exprimÃ©s en pixels, tandis que toutes les autres grandeurs sont en pourcentage de la longueur de la
+			barre.</p>
 		</section>
 		
 		<aside id="choix">
@@ -56,7 +62,7 @@
 			</div>
 			
 			<div class="formPart"><!-- Drapeau d'arriere-plan -->
-			<label for="bgFlag">Drapeau d'arrière-plan :</label>
+			<label for="bgFlag">Drapeau d'arriÃ¨re-plan :</label>
 			<br/>
 			<select id="bgFlag">
 				<option value="rainbowAns">Rainbow</option>
@@ -64,7 +70,7 @@
 				<option value="trans2Ans">Trans (bis)</option>
 				<option value="panAns">Pan</option>
 				<option value="biAns">Bi</option>
-				<option value="animatedRainbowAns">Arc-en-ciel animé</option>
+				<option value="animatedRainbowAns">Arc-en-ciel animÃ©*</option>
 			</select>
 			</div>
 			
@@ -73,7 +79,7 @@
 				<label for="typeCouleur2">Couleur : </label>
 				<br/>
 				<select id="typeCouleur1">
-					<option value="rand">(Pseudo-)aléatoire</option>
+					<option value="rand">(Pseudo-)alÃ©atoire</option>
 					<option value="col">Constante</option>
 					<option value="rainbow">Arc-en-ciel</option>
 					<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
@@ -84,31 +90,20 @@
 					<input type="color" name="valCouleur" id="valCouleur1" disabled="true" value="#ffc0cb"/>
 				</div>
 				<br/>
-				<label for="dir1">Sens direct (barre): </label>
+				<label for="dir1">Sens direct</label>
 				<input type="checkbox" id="dir1" name="dir1" checked/>
 				<br/>
-				<br/>
-				<label for="dirT">Sens indirect (cercle): </label>
-				<input type="checkbox" id="dirT" name="dirT" checked/>
-				<br/>
-				<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
-				<br/>
-				<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
-				<br/>
-				<label for="pdCentre">Décentrage \(\alpha\): </label>
-				<br/>
-				<input type="number" id="pdCentre" name="pdCentre" min="0" max="1" step="0.01" value="0.33"/>
 			</div>
 			
-			<div class="formPart"><!-- Deuxième symbole -->
-				<label for="cbSymb2" class="titre">Deuxième symbole</label>
+			<div class="formPart"><!-- DeuxiÃ¨me symbole -->
+				<label for="cbSymb2" class="titre">DeuxiÃ¨me symbole</label>
 				<input type="checkbox" name="cbSymb2" id="cbSymb2" checked/>
 				<br/>
 				<div id="divSymb2">
 					<label for="typeCouleur2">Couleur : </label>
 					<br/>
 					<select id="typeCouleur2">
-						<option value="rand">(Pseudo-)aléatoire</option>
+						<option value="rand">(Pseudo-)alÃ©atoire</option>
 						<option value="col">Constante</option>
 						<option value="rainbow">Arc-en-ciel</option>
 						<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
@@ -122,16 +117,32 @@
 					<label for="dir2">Sens direct : </label>
 					<input type="checkbox" id="dir2" name="dir2"/>
 					<br/>
-					<label for="phi2" title="En rad, par rapport au premier">Déphasage : </label>
+					<label for="phi2" title="En rad, par rapport au premier">DÃ©phasage : </label>
 					<br/>
 					<input type="number" id="phi2" name="phi2" min="0" max="6.28" step="0.01" value="0">
 				</div>
 			</div>
 			
-			<div class="formPart"><!-- Caractéristiques des symboles -->
+			<div class="formPart">
+				<p class="titre">
+				<img id="imgRel" src="../0-Contenus/FlecheBas.png" alt="v"/>Positions des symboles</p>
+				<label for="dirT">Sens direct <img src="../0-Contenus/info.png" alt="info"
+				title="L'angle formÃ© entre la vertical et le centre du second cercle"/></label>
+				<input type="checkbox" id="dirT" name="dirT" checked/>
+				<br/>
+				<label for="phiT" title="En rad">DÃ©phasage \( \varphi_t \): </label>
+				<br/>
+				<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
+				<br/>
+				<label for="pdCentre">DÃ©centrage \(\alpha\): </label>
+				<br/>
+				<input type="number" id="pdCentre" name="pdCentre" min="0" max="1" step="0.01" value="0.33"/>
+			</div>
+			
+			<div class="formPart"><!-- CaractÃ©ristiques des symboles -->
 				<p class="titre">
 				<img id="imgPara" src="../0-Contenus/FlecheDroite.png" alt=">"/>
-				Paramètres des symboles</p>
+				ParamÃ¨tres des symboles</p>
 				<div id="divPara" style="display:none;">
 					<label for="epaisseur" title="En px">Epaisseur des traits : </label>
 					<br/>
@@ -145,11 +156,11 @@
 					<br/>
 					<input type="number" id="lBarre" name="lBarre" value="100" min="0" max="150"/>
 					<br/>
-					<label for="aFleche" title="En rad">Angle des flèches :</label>
+					<label for="aFleche" title="En rad">Angle des flÃ¨ches :</label>
 					<br/>
 					<input type="number" id="aFleche" name="aFleche" value="1.83" min="0" max="3.14" step="0.01"/>
 					<br/>
-					<label for="pFleche" title="En % de la taille de la barre">Taille des flèches :</label>
+					<label for="pFleche" title="En % de la taille de la barre">Taille des flÃ¨ches :</label>
 					<br/>
 					<input type="number" id="pFleche" name="pFleche" value="0.5" min="0" max="1" step="0.01"/>
 					<br/>
@@ -163,7 +174,7 @@
 				</div>
 			</div>
 			
-			<div class="formPart" style="display:none;"><!-- Normalement pas utilisé -->
+			<div class="formPart" style="display:none;"><!-- Normalement pas utilisÃ© -->
 				<p id="testText"></p>
 				<input type="button" value="Click me !" id="testInput"/>
 			</div>
