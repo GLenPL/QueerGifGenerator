@@ -33,10 +33,10 @@
 			
 			<h2>Quelques explications</h2>
 			<p>Tous les sripts de cette page sont codés en javascript et accesible
-			<a href="https://github.com/GLenPL/Queer">ici</a>. Un code dessine toute les 40 millisecondes sur 
+			<a href="https://github.com/GLenPL/Queer">ici</a>. Un code dessine toute les 30 millisecondes sur 
 			l'élément central de la page page, donnant une illusion de mouvment. Losrque le bouton ad hoc est utilisé
 			toutes les frames sont enregistrées une par une (le processus est relativement long et peu facilement
-			prendre plus de 40ms, ce qui explique le ralentissement de l'animation) avant d'être utilisées pour créer 
+			prendre plus de 30ms, ce qui explique le ralentissement de l'animation) avant d'être utilisées pour créer 
 			un gif. Celui-ci est alors téléchargé. Tout est fait localement dans le navigateur.</p>
 			<p>Pour les explications à propos des paramètres, il va falloir attendre un joli schéma (et donc beaucoup
 			de motivation de ma part). On note toutefois que seuls le rayon du cercle et la taille de la barre sont
@@ -62,6 +62,7 @@
 			</div>
 			
 			<div class="formPart"><!-- Drapeau d'arriere-plan -->
+			<p class="titre">Arrière-plan</p>
 			<label for="bgFlag">Drapeau d'arrière-plan :</label>
 			<br/>
 			<select id="bgFlag">
@@ -70,8 +71,11 @@
 				<option value="trans2Ans">Trans (bis)</option>
 				<option value="panAns">Pan</option>
 				<option value="biAns">Bi</option>
-				<option value="animatedRainbowAns">Arc-en-ciel animé*</option>
+				<option value="intersexAns">Intersex</option>
 			</select>
+			<br/>
+			<label for="refreshed">Rafraichit</label>
+			<input type="checkbox" id="refreshed" name="refreshed" checked/>
 			</div>
 			
 			<div class="formPart"><!-- Premier symbole -->
@@ -123,20 +127,26 @@
 				</div>
 			</div>
 			
-			<div class="formPart">
+			<div class="formPart"><!-- Position des symboles-->
 				<p class="titre">
-				<img id="imgRel" src="../0-Contenus/FlecheBas.png" alt="v"/>Positions des symboles</p>
-				<label for="dirT">Sens direct <img src="../0-Contenus/info.png" alt="info"
-				title="L'angle formé entre la vertical et le centre du second cercle"/></label>
-				<input type="checkbox" id="dirT" name="dirT" checked/>
-				<br/>
-				<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
-				<br/>
-				<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
-				<br/>
-				<label for="pdCentre">Décentrage \(\alpha\): </label>
-				<br/>
-				<input type="number" id="pdCentre" name="pdCentre" min="0" max="1" step="0.01" value="0.33"/>
+				<img id="imgPos" src="../0-Contenus/FlecheBas.png" alt="v"/>Positions des symboles</p>
+				<div id="divPos">
+					<label for="dirT">Sens direct <img src="../0-Contenus/info.png" alt="info"
+					title="L'angle formé entre la vertical et le centre du second cercle"/></label>
+					<input type="checkbox" id="dirT" name="dirT" checked/>
+					<br/>
+					<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
+					<br/>
+					<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
+					<br/>
+					<label for="pdCentre">Décentrage \(\alpha\): </label>
+					<br/>
+					<input type="number" id="pdCentre" name="pdCentre" min="0" max="1" step="0.01" value="0.33"/>
+					<br/>
+					<label for="pEspacement" title="En % du rayon des cercles">Écartement des cercles :</label>
+					<br/>
+					<input type="number" id="pEspacement" name="pEspacement" value="1.5" min="0" max="2.5" step="0.01"/>
+				</div>
 			</div>
 			
 			<div class="formPart"><!-- Caractéristiques des symboles -->

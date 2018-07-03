@@ -18,11 +18,12 @@
 		var eBGif = document.getElementById('bGif');
 		var eNom = document.getElementById('nom');
 		
-		var eEpaisseur = document.getElementById('epaisseur');
-		var eBGFlag = document.getElementById('bgFlag');
 		
+		var eBGFlag = document.getElementById('bgFlag');
+		var eRefreshed = document.getElementById('refreshed');
 		
 		var eImgPara = document.getElementById('imgPara');
+		var eEpaisseur = document.getElementById('epaisseur');
 		var eDivPara = document.getElementById('divPara');
 		var eRCercle = document.getElementById('rCercle');
 		var eLBarre = document.getElementById('lBarre');
@@ -31,13 +32,17 @@
 		var ePDCroix = document.getElementById('pdCroix');
 		var ePCroix = document.getElementById('pCroix');
 		
+		var eImgPos = document.getElementById('imgPos');
+		var eDivPos = document.getElementById('divPos');
+		var eDirT = document.getElementById('dirT');
+		var ePhiT = document.getElementById('phiT');
+		var ePDCentre = document.getElementById('pdCentre');
+		var ePEspacement = document.getElementById('pEspacement');
+		
 		var eTypeCouleur1 = document.getElementById('typeCouleur1');
 		var eValCouleur1 = document.getElementById('valCouleur1');
 		var eDivValCouleur1 = document.getElementById('divValCouleur1');
 		var eDir1 = document.getElementById('dir1');
-		var eDirT = document.getElementById('dirT');
-		var ePhiT = document.getElementById('phiT');
-		var ePDCentre = document.getElementById('pdCentre');
 		
 		var eDivSymb2 = document.getElementById('divSymb2');
 		var eCbSymb2 = document.getElementById('cbSymb2');
@@ -65,8 +70,9 @@
 		var trans2 = ['magenta','orchid','mediumOrchid','darkOrchid','blue'];
 		var pan = ['magenta','gold','skyBlue'];
 		var bi = ['mediumVioletRed','mediumVioletRed','mediumOrchid','blue','blue'];
+		var intersex = ['plum','white','lightBlue','pink','white','plum'];
 		
-		var flagInUse = rainbow;
+		var flagInUse = intersex;
 		}
 		
 		{//contantes et variables des symboles
@@ -77,6 +83,7 @@
 		canvas.height = 360;//à ajouter					<----
 		var cy = canvas.height/2;//lié à un autre
 		var cx = canvas.width/2;//lié à un autre
+		var refreshed = true;
 		
 		var paraVisible = false;
 		var dtheta = 1;//fini
@@ -87,10 +94,10 @@
 		var pdCroix = 0.5;//fini
 		var pCroix = 0.45;//fini
 		
-		var posiVisible = true;
-		var sensDirT = true;//fini, à réarranger
-		var phiT = ePhiT.value;//fini, à réarranger
-		var pdCentre = 1/3;//fini, à réarranger
+		var posVisible = true;
+		var sensDirT = !eDirT.checked;//fini
+		var phiT = ePhiT.value;//fini
+		var pdCentre = 1/3;//fini
 		var pEspacement = 1.5;//à ajouter				<----
 		
 		var typeCouleur1InUse = 'rand';//fini
@@ -140,38 +147,41 @@
 			case 'biAns':
 				flagInUse = bi;
 				break;
+			case 'intersexAns':
+				flagInUse = intersex;
+				break;
 			case 'animatedRainbowAns':
 				flagInUse = 'animatedRainbow';
 				break;
 			default:
 				flagInUse = rainbow;
 		}
+		arrierePlan(flagInUse,angle);
 	}
-	
+	eRefreshed.onchange = function(){
+		refreshed = eRefreshed.checked;
+	}
 	eRCercle.onchange = function(){
 		rCercle = parseInt(eRCercle.value);
 	}
-	
 	eLBarre.onchange = function(){
 		lBarre = parseInt(eLBarre.value);
 	}
-	
 	eAFleche.onchange = function(){
 		aFleche = parseFloat(eAFleche.value);
 	}
-	
 	ePDCroix.onchange = function(){
 		pdCroix = parseFloat(ePDCroix.value);
 	}
-	
 	ePCroix.onchange = function(){
 		pCroix = parseFloat(ePCroix.value);
 	}
-	
 	ePFleche.onchange = function(){
 		pFleche = parseFloat(ePFleche.value);
 	}
-	
+	ePEspacement.onchange = function(){
+		pEspacement = parseFloat(ePEspacement.value);
+	}
 	eTypeCouleur1.onchange = function(){
 		typeCouleur1InUse = eTypeCouleur1.value;
 		if (eTypeCouleur1.value == 'col'){
@@ -184,25 +194,20 @@
 			eDivValCouleur1.style.display = 'none';
 		}
 	}
-	
 	eValCouleur1.onchange = function(){
 		valCouleur1InUse = eValCouleur1.value;
 	}
-	
 	eDir1.onchange = function(){
 		sensDir1 = eDir1.checked;
 	}
-	
 	eDirT.onchange = function(){
 		sensDirT = !eDirT.checked;
 	}
-	
 	eCbSymb2.onchange = function(){
 		symb2Exists = eCbSymb2.checked;
 		if (symb2Exists){eDivSymb2.style.display = '';}
 		else{eDivSymb2.style.display = 'none';}
 	}
-	
 	eTypeCouleur2.onchange = function(){
 		typeCouleur2InUse = eTypeCouleur2.value;
 		if (eTypeCouleur2.value == 'col'){
@@ -215,23 +220,18 @@
 			eDivValCouleur2.style.display = 'none';
 		}
 	}
-	
 	eValCouleur2.onchange = function(){
 		valCouleur2InUse = eValCouleur2.value;
 	}
-	
 	eDir2.onchange = function(){
 		sensDir2 = eDir2.checked;
 	}
-	
 	ePhi2.onchange = function(){
 		phi2 = ePhi2.value*1;
 	}
-	
 	ePhiT.onchange = function(){
 		phiT = ePhiT.value*1;
 	}
-	
 	ePDCentre.onchange = function(){
 		pdCentre = ePDCentre.value*1;
 	}
@@ -252,6 +252,21 @@
 			eImgPara.src = "../0-Contenus/FlecheDroite.png";
 			eImgPara.alt = ">"
 			eDivPara.style.display = 'none';
+		}
+	}
+	
+	eImgPos.onclick = function(){
+		posVisible = !posVisible;
+		
+		if(posVisible){
+			eImgPos.src = "../0-Contenus/FlecheBas.png";
+			eImgPos.alt = "v"
+			eDivPos.style.display = '';
+		}
+		else{
+			eImgPos.src = "../0-Contenus/FlecheDroite.png";
+			eImgPos.alt = ">"
+			eDivPos.style.display = 'none';
 		}
 	}
 	
@@ -296,7 +311,7 @@
 		}
 		
 		{//desssin de la frame
-		arrierePlan(flagInUse,angle);
+		if (refreshed){arrierePlan(flagInUse,angle);}
 		
 		if (symb2Exists){
 			var cx2 = cx+Math.sin(dir(sensDirT,angle-phiT))*rCercle*(1-pdCentre)*pEspacement;
