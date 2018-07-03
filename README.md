@@ -8,6 +8,7 @@ Le fonctionnement est simple : tout est inclus ! Il suffit de télécharger l'en
 EN:
 A little LGBTQ+ gif generator, made out of HTML, CSS and javascript.
 
-Easy to use : download the whole repository (or only the three files), open "2-Codes" and then "Queer.html" with your browser (Chrome and Firefox are the only tested one). You now have two options :
+Easy to use : download the whole repository (or only the three files), open "2-Codes" and then "Queer.html" with your browser (Chrome and Firefox are the only tested one). You now have three options :
 - learn French and understand the instructions;
-- try to understand how it works and improve your retroengineering skills.
+- read and understand the code;
+- improve your retroengineering skills.
