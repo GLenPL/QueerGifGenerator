@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		
+		<title>Symbol selecter template</title>
+		
+		<link rel="stylesheet" href="../style.css"/>
+		<script>
+		function closeFunction(elem){
+			p = elem.parentNode;
+			p.parentNode.removeChild(p);
+		}
+		</script>
+	</head>
+	
+	<body>
+	<div id="choix">
+		<div class="symb" id="template">
+			<img style="margin:1px" src="../0-Contenus/croix.png" alt="x supprimer le symbole" onclick="closeFunction(this);"/>
+			<br/>
+			<label>Couleur : </label>
+			<br/>
+			<select>
+				<option value="rand">(Pseudo-)aléatoire</option>
+				<option value="col">Constante</option>
+				<option value="rainbow">Arc-en-ciel</option>
+				<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
+				<option value="hidden">Invisible</option>
+			</select>
+			<br/>
+			<div style="display:none">
+				<label>Valeur : </label>
+				<input type="color" disabled="true" value="#ffc0cb"/>
+			</div>
+			<label>Sens direct : </label>
+			<input type="checkbox" id="dir2" name="dir2"/>
+			<br/>
+			<label title="En rad, par rapport au premier">Déphasage 1: </label>
+			<input type="number" min="0" max="6.28" step="0.01" value="0"/>
+			<br/>
+			<label title="En rad, par rapport au premier">Déphasage 2: </label>
+			<input type="number" min="0" max="6.28" step="0.01" value="0"/>
+		</div>
+	</div>
+	</body>
+</html>

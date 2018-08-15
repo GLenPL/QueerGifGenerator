@@ -1,4 +1,18 @@
-﻿window.onload =function(){
+﻿/*
+Commentaires sur les commentaires et notes diverses :
+- IL FAUT QUE J4AHOUTE DES COMMENTAIRES D'EXPLICATION PARTOUT !
+- certains n sont qu temporaires pour permettre de connaitre mon avancement
+- ma touch 'e' ne fonctionne pas très bien (le claier entier, en fait), il y a *beaucoup* de fautes de frappes
+
+About comments :
+- sorry, i'm french, i don't work directly in english, so comments must be translated in order to exist;
+- tbh, they often need to be created in french, you don't miss too much;
+- my keyboard is quite old and doesn't work quite well, some letters are missing (mainly 'e')  
+*/
+
+var bSymbChanged = false;
+
+window.onload = function(){
 							
 		var canvas = document.getElementById("canvas1");
 			if(!canvas){
@@ -36,27 +50,19 @@
 		var eDivPos = document.getElementById('divPos');
 		var eDirT = document.getElementById('dirT');
 		var ePhiT = document.getElementById('phiT');
-		var ePDCentre = document.getElementById('pdCentre');
 		var ePEspacement = document.getElementById('pEspacement');
 		
-		var eTypeCouleur1 = document.getElementById('typeCouleur1');
-		var eValCouleur1 = document.getElementById('valCouleur1');
-		var eDivValCouleur1 = document.getElementById('divValCouleur1');
-		var eDir1 = document.getElementById('dir1');
-		
-		var eDivSymb2 = document.getElementById('divSymb2');
-		var eCbSymb2 = document.getElementById('cbSymb2');
-		var eTypeCouleur2 = document.getElementById('typeCouleur2');
-		var eValCouleur2 = document.getElementById('valCouleur2');
-		var eDivValCouleur2 = document.getElementById('divValCouleur2');
-		var eDir2 = document.getElementById('dir2');
-		var ePhi2 = document.getElementById('phi2');
+		var eNewSymb = document.getElementById('newSymb');
+		var eSymbTemp = document.getElementById('symbTemp');
+		var eSymbDiv = document.getElementById('symbDiv');
 		
 		var eSpeed = document.getElementById('speed');
+		var e0angle = document.getElementById('0angle');
 		var timeExe = document.getElementById('timeExe');
 		
 		var eTestText = document.getElementById('testText');
 		var eTestInput = document.getElementById('testInput');
+		var eTestDiv = document.getElementById('testDiv');
 		
 		var info = document.getElementById('info');
 		var dChoix = document.getElementById('choix');
@@ -71,44 +77,43 @@
 		var pan = ['magenta','gold','skyBlue'];
 		var bi = ['mediumVioletRed','mediumVioletRed','mediumOrchid','blue','blue'];
 		var intersex = ['plum','white','lightBlue','pink','white','plum'];
+		var enby = ['yellow','white','purple','black'];
+		var aro = ['darkGreen','green','yellow','gray','black'];
+		var ace = ['black','grey','white','purple'];
 		
-		var flagInUse = intersex;
+		var flagInUse = rainbow;
 		}
 		
 		{//contantes et variables des symboles
 		//A prpos des input restants à ajouter :
-		var angle = 0;//fini
-		var pi = Math.PI;//fini
-		canvas.width = 500;//à ajouter					<----
-		canvas.height = 360;//à ajouter					<----
+		var angle = 0;
+		var pi = Math.PI;
+		canvas.width = 500;//à ajouter/tba				<----
+		canvas.height = 360;//à ajouter/tba				<----
 		var cy = canvas.height/2;//lié à un autre
 		var cx = canvas.width/2;//lié à un autre
 		var refreshed = true;
 		
 		var paraVisible = false;
-		var dtheta = 1;//fini
-		var rCercle = 40;//fini
-		var lBarre = 100;//fini
-		var aFleche = 7*pi/12;//fini
-		var pFleche = 0.5;//fini
-		var pdCroix = 0.5;//fini
-		var pCroix = 0.45;//fini
+		var dtheta = 1;
+		var rCercle = 40;
+		var lBarre = 100;
+		var aFleche = 7*pi/12;
+		var pFleche = 0.5;
+		var pdCroix = 0.5;
+		var pCroix = 0.45;
+		var epaisseur = 10;
 		
 		var posVisible = true;
-		var sensDirT = !eDirT.checked;//fini
-		var phiT = ePhiT.value;//fini
-		var pdCentre = 1/3;//fini
-		var pEspacement = 1.5;//à ajouter				<----
+		var sensDirT = !eDirT.checked;
+		var phiT = parseFloat(ePhiT.value);
+		var pEspacement = 1.5;
 		
-		var typeCouleur1InUse = 'rand';//fini
-		var valCouleur1InUse = null;//fini
-		var sensDir1 = true;//fini
-		
-		var symb2Exists = eCbSymb2.checked;
-		var typeCouleur2InUse = 'rand';
-		var valCouleur2InUse = null;
-		var sensDir2 = false;
-		var phi2 = 0;
+		var allSymbols = getSymb();
+		var qttSymbs = allSymbols.length;
+		//cette variable va contenir l'ensenble de tout les symboles devant être dessinés, autre que le premier.
+		//l'information est sous forme d'array, avec, dans l'ordre :
+		// div du symbole,type couleur, couleur,sens, déphasage1, déphasage2
 		}
 		
 		{//constantes et variables du temps
@@ -125,10 +130,10 @@
 		var msgCount = 0;
 		}
 		}
-		arrierePlan(rainbow,0);//si quelquechose plante après, il y a au moins un joli arrière-plan
+		
+		arrierePlan(rainbow,0,context);//si quelquechose plante après, il y a au moins un joli arrière-plan
 		
 	var myInterval = setInterval(animate, 30);
-	
 	{//On ne récupère les valeurs des variables que lorsqu'elles sont changées, pas à chaque itération
 	eBGFlag.onchange = function(){
 		switch(eBGFlag.value){
@@ -150,13 +155,25 @@
 			case 'intersexAns':
 				flagInUse = intersex;
 				break;
+			case 'intersex2Ans':
+				flagInUse = 'intersex2';
+				break;
+			case 'enbyAns':
+				flagInUse = enby;
+				break;
+			case 'aroAns':
+				flagInUse = aro;
+				break;
+			case 'aceAns':
+				flagInUse = ace;
+				break;
 			case 'animatedRainbowAns':
 				flagInUse = 'animatedRainbow';
 				break;
 			default:
 				flagInUse = rainbow;
 		}
-		arrierePlan(flagInUse,angle);
+		arrierePlan(flagInUse,angle,context);
 	}
 	eRefreshed.onchange = function(){
 		refreshed = eRefreshed.checked;
@@ -182,62 +199,32 @@
 	ePEspacement.onchange = function(){
 		pEspacement = parseFloat(ePEspacement.value);
 	}
-	eTypeCouleur1.onchange = function(){
-		typeCouleur1InUse = eTypeCouleur1.value;
-		if (eTypeCouleur1.value == 'col'){
-			valCouleur1InUse = eValCouleur1.value;
-			eValCouleur1.disabled = false;
-			eDivValCouleur1.style.display = '';
-		}
-		else{
-			eValCouleur1.disabled = true;
-			eDivValCouleur1.style.display = 'none';
-		}
+	eEpaisseur.onchange = function(){
+		epaisseur = parseFloat(eEpaisseur.value);
 	}
-	eValCouleur1.onchange = function(){
-		valCouleur1InUse = eValCouleur1.value;
-	}
-	eDir1.onchange = function(){
-		sensDir1 = eDir1.checked;
+	ePhiT.onchange = function(){
+		phiT = parseFloat(ePhiT.value);
 	}
 	eDirT.onchange = function(){
 		sensDirT = !eDirT.checked;
 	}
-	eCbSymb2.onchange = function(){
-		symb2Exists = eCbSymb2.checked;
-		if (symb2Exists){eDivSymb2.style.display = '';}
-		else{eDivSymb2.style.display = 'none';}
-	}
-	eTypeCouleur2.onchange = function(){
-		typeCouleur2InUse = eTypeCouleur2.value;
-		if (eTypeCouleur2.value == 'col'){
-			valCouleur2InUse = eValCouleur2.value;
-			eValCouleur2.disabled = false;
-			eDivValCouleur2.style.display = '';
-		}
-		else{
-			eValCouleur2.disabled = true;
-			eDivValCouleur2.style.display = 'none';
-		}
-	}
-	eValCouleur2.onchange = function(){
-		valCouleur2InUse = eValCouleur2.value;
-	}
-	eDir2.onchange = function(){
-		sensDir2 = eDir2.checked;
-	}
-	ePhi2.onchange = function(){
-		phi2 = ePhi2.value*1;
-	}
-	ePhiT.onchange = function(){
-		phiT = ePhiT.value*1;
-	}
-	ePDCentre.onchange = function(){
-		pdCentre = ePDCentre.value*1;
+	e0angle.onclick = function(){
+		angle = 0;
 	}
 	}
 	
+	eNewSymb.onclick = function(){
+		var eClonedSymb = eSymbTemp.cloneNode(true);
+		eClonedSymb.removeAttribute('id');
+		eClonedSymb.setAttribute('class','symb');
+		var p = eNewSymb.parentNode;
+		p.insertBefore(eClonedSymb,eNewSymb);
+		bSymbChanged = true;
+	}
+	
 	eTestInput.onclick = function(){
+		var a = ['a','b','c'];
+		a.forEach(function(el){alert(el);});
 	}
 	
 	eImgPara.onclick = function(){
@@ -254,7 +241,6 @@
 			eDivPara.style.display = 'none';
 		}
 	}
-	
 	eImgPos.onclick = function(){
 		posVisible = !posVisible;
 		
@@ -292,7 +278,9 @@
 		console.log('Nom du gif : ');
 	}
 	
-	function animate(){//fonction principale gérant le dessin sur le canvas et l'enregistrement du gif si demandé
+	function animate(){
+	//fonction principale rélisant une frame, son enregistrement si nécessaire et gérant la variable 'angle'
+	//main function : draws one frame, record if necessary and refresh the 'angle' variable
 		{//timer & affichage du temps
 		temps = timeNew.getTime() - timeOld.getTime();
 		timeExe.innerHTML = 'Temps d\'éxecution : ' + temps + 'ms';
@@ -302,27 +290,25 @@
 		}
 		
 		{//gestion des constantes sur la frame
-		dtheta = eSpeed.value*0.030;
-		var eSymb1 = eEpaisseur.value;
-		var cSymb1 = couleurFunc(angle,typeCouleur1InUse,valCouleur1InUse);
-		var cSymb2 = couleurFunc(angle,typeCouleur2InUse,valCouleur2InUse);
-		
+		dtheta = eSpeed.value*0.030;		
 		context.lineJoin = 'bevel';
 		}
 		
 		{//desssin de la frame
-		if (refreshed){arrierePlan(flagInUse,angle);}
+		if (refreshed){arrierePlan(flagInUse,angle,context);}
 		
-		if (symb2Exists){
-			var cx2 = cx+Math.sin(dir(sensDirT,angle-phiT))*rCercle*(1-pdCentre)*pEspacement;
-			var cy2 = cy-Math.cos(dir(sensDirT,angle-phiT))*rCercle*(1-pdCentre)*pEspacement;
-			var angle2 = dir(sensDir2,angle+phi2);
-			symbole(cx2,cy2,angle2,context,eSymb1,cSymb2,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix)
+		var phiRel = 2*pi/qttSymbs;
+		eTestText.innerHTML =  (0+phiT) + ' ';
+		for(var i = 0; i < qttSymbs;i++){
+			var theta = phiRel*i;
+			var cxs = cx+Math.cos(theta+phiT+dir(sensDirT,angle))*pEspacement*rCercle; 
+			var cys = cy-Math.sin(theta+phiT+dir(sensDirT,angle))*pEspacement*rCercle; 
+			var angles = dir(allSymbols[i][2],angle+allSymbols[i][3]);
+			var cols = couleurFunc(angle,allSymbols[i][0],allSymbols[i][1]);
+			symbole(cxs,cys,angles,context,epaisseur,cols,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix);
+			eTestText.innerHTML += i;
+			
 		}
-		var cx1 = cx-Math.sin(dir(sensDirT,angle-phiT))*rCercle*(pdCentre)*pEspacement;
-		var cy1 = cy+Math.cos(dir(sensDirT,angle-phiT))*rCercle*(pdCentre)*pEspacement;
-		var angle1 = dir(sensDir1,angle);
-		symbole(cx1,cy1,angle1,context,eSymb1,cSymb1,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix);
 		}
 		
 		{//gestion de l'enregistrement du gif
@@ -335,6 +321,12 @@
 			infoMessage(msg,2000,true,frameTot-frameRestantes,frameTot);
 		}
 		
+		if(bSymbChanged){
+			allSymbols = getSymb();
+			qttSymbs = allSymbols.length;
+			bSymbChanged = false;
+		}
+		
 		if (frameRestantes == 0 & recordGif){
 			recordGif = false;
 			eChoix.style.opacity = 1;
@@ -343,7 +335,7 @@
 			
 			console.log('*********');
 			console.log('Le gif a bien été enregistré et téléchargé.');
-			infoMessage('Enregistrement terminé !',2000,false,null,null);
+			infoMessage('Enregistrement terminé !',3000,false,null,null);
 		}
 		}
 		
@@ -353,6 +345,8 @@
 	}
 	
 	function dir(b,theta){
+	//renvoie f(theta) mod 2pi où f(x)=x si b et f(x)=-x si !b
+	//returns f(theta) mod 2pi where f(x)=x if b and f(x)=-x if !b
 		var ret = theta;
 		if (!b){ret = 2*pi-theta;}
 		while (ret<0){ret = ret+ 2*pi;}
@@ -360,26 +354,43 @@
 		return ret;
 	}
 	
-	function arrierePlan(flag,theta){
+	function arrierePlan(flag,theta,ctx){
+	//dessine l'arrière plan d'une frame selon le motif demandé
+	//draws the frame's background according to the requested flag 
 		switch (flag) {
 			case 'animatedRainbow':
 				for (var i = 0;i<6;i++){
-					context.fillStyle = couleurFunc(theta + i*pi/3,'rainbow',null);
-					context.fillRect(0,canvas.height/6*i,canvas.width,canvas.height/6);
+					ctx.fillStyle = couleurFunc(theta + i*pi/3,'rainbow',null);
+					ctx.fillRect(0,canvas.height/6*i,canvas.width,canvas.height/6);
 				}
 				break;
-			
+			case 'intersex2':
+				ctx.fillStyle = 'yellow';
+				ctx.fillRect(0,0,canvas.width, canvas.height);
+				ctx.strokeStyle = 'purple';
+				var minDim = Math.min(canvas.width,canvas.height);
+				ctx.lineWidth = 10;
+				console.log('lineWidth');
+				ctx.beginPath();
+				console.log('beginPath');
+				//ctx.arc(canvas.width/2,canvas.height/2,minDim/20,0,2*pi);
+				ctx.arc(100,100,5,0,2*pi);
+				console.log('arc');
+				ctx.stroke();
+				console.log('stroke');
 			default:
 			var len = flag.length;
 			var stripHeight = canvas.height/len;
 				for (var i =0; i < len; i++){
-					context.fillStyle = flag[i];
-					context.fillRect(0,stripHeight*i,canvas.width,stripHeight);
+					ctx.fillStyle = flag[i];
+					ctx.fillRect(0,stripHeight*i,canvas.width,stripHeight);
 				}
 		}
 	}
 	
-	function symbole(x,y,theta,cxt,e,c,r,lB,aF,pF,pC,pdC){//dessine un ymbole selon pleeeins de variables
+	function symbole(x,y,theta,cxt,e,c,r,lB,aF,pF,pC,pdC){
+	//dessine un symbole selon pleeeins de variables
+	//draws a symbol dependending on muuuch parameters
 		cxt.strokeStyle = c;
 		cxt.lineWidth = e;
 		
@@ -421,7 +432,9 @@
 		}
 	}
 	
-	function couleurFunc(theta,type,couleur){//une simple famille de fonctions 2pi-périodiques de R dans le colorspace
+	function couleurFunc(theta,type,couleur){
+	//une simple famille de fonctions 2pi-périodiques de R dans le colorspace
+	//some continuous 2pi-periodic functions from R to the colorspace
 		switch (type){
 			case 'rand':
 				var r = Math.floor((Math.sin(5*theta)+Math.sin(theta)+2)*64);
@@ -443,6 +456,9 @@
 				break;
 			case 'col':
 				var ret = couleur;
+				break;
+			case 'hidden':
+				var ret = 'rgba(0,0,0,0)';
 			
 		}
 		return ret;
@@ -470,5 +486,48 @@
 			}
 			msgCount--}
 		, temps);
+	}
+	
+	function getSymb(){
+		console.log('Récupération des consignes des symboles :');
+		var allSymb = document.getElementsByClassName('symb');
+		console.log(allSymb);
+		var aSymbsValeurs = [];
+		for(var i = 0; i < allSymb.length; i++){
+			var elValues = [];
+			elValues.push(nthSibling(allSymb[i].firstChild,5).value);
+			elValues.push(nthSibling(nthSibling(allSymb[i].firstChild,6).firstChild,2).value);
+			elValues.push(nthSibling(allSymb[i].firstChild,9).checked);
+			elValues.push(parseFloat(nthSibling(allSymb[i].firstChild,12).value));
+			aSymbsValeurs.push(elValues);
+		}
+		console.log(aSymbsValeurs);
+		return aSymbsValeurs
+	}
+}
+
+function nthSibling(elem,n){
+	var ret;
+	if(n==0){ret = elem;}
+	else{ret = nthSibling(elem,n-1).nextElementSibling;}
+	return ret;
+}
+
+function closeSymb(elem){
+	p = elem.parentNode;
+	p.parentNode.removeChild(p);
+	bSymbChanged = true;
+}
+
+function changeColor(elem){
+	var d = elem.nextElementSibling;
+	var c = d.firstChild.nextElementSibling.nextElementSibling
+	if(elem.value == "col"){
+		d.style.display = '';
+		c.removeAttribute('disabled');
+	}
+	else{
+		d.style.display = 'none';
+		c.setAttribute('disabled','true');
 	}
 }

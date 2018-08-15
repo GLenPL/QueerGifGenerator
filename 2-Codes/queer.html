@@ -37,11 +37,10 @@
 			l'élément central de la page page, donnant une illusion de mouvment. Losrque le bouton ad hoc est utilisé
 			toutes les frames sont enregistrées une par une (le processus est relativement long et peu facilement
 			prendre plus de 30ms, ce qui explique le ralentissement de l'animation) avant d'être utilisées pour créer 
-			un gif. Celui-ci est alors téléchargé. Tout est fait localement dans le navigateur.</p>
-			<p>Pour les explications à propos des paramètres, il va falloir attendre un joli schéma (et donc beaucoup
-			de motivation de ma part). On note toutefois que seuls le rayon du cercle et la taille de la barre sont
-			exprimés en pixels, tandis que toutes les autres grandeurs sont en pourcentage de la longueur de la
-			barre.</p>
+			un gif. Pendant l'enregistrement d'un gif, le panneau des paramètres est dsactivé, pour éviter de les 
+			faires varier pendant l'enregistrement. Une fois fini, le gif est téléchargé. Tout est fait localement 
+			dans le navigateur.</p>
+			<p>Work in progress ...</p>
 		</section>
 		
 		<aside id="choix">
@@ -59,6 +58,8 @@
 			<label for="speed" title="En rad/s"> Vitesse de rotation : </label>
 			<br/>
 			<input type="number" name="speed" id="speed" min="-5" max="5" step="0.05" value="1"/>
+			<br/>
+			<input type="button" id="0angle" value="Remettre à 0"/>
 			</div>
 			
 			<div class="formPart"><!-- Drapeau d'arriere-plan -->
@@ -72,80 +73,86 @@
 				<option value="panAns">Pan</option>
 				<option value="biAns">Bi</option>
 				<option value="intersexAns">Intersex</option>
+				<!--<option value="intersex2Ans">Intersex (another one)</option>-->
+				<option value="enbyAns">Enby</option>
+				<option value="aroAns">Aro</option>
+				<option value="aceAns">Ace</option>
+				
 			</select>
 			<br/>
 			<label for="refreshed">Rafraichit</label>
 			<input type="checkbox" id="refreshed" name="refreshed" checked/>
 			</div>
 			
-			<div class="formPart"><!-- Premier symbole -->
-				<p class="titre">Premier symbole</p>
-				<label for="typeCouleur2">Couleur : </label>
-				<br/>
-				<select id="typeCouleur1">
-					<option value="rand">(Pseudo-)aléatoire</option>
-					<option value="col">Constante</option>
-					<option value="rainbow">Arc-en-ciel</option>
-					<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
-				</select>
-				<br/>
-				<div id="divValCouleur1" style="display:none">
-					<label for="valCouleur1">Valeur : </label>
-					<input type="color" name="valCouleur" id="valCouleur1" disabled="true" value="#ffc0cb"/>
-				</div>
-				<br/>
-				<label for="dir1">Sens direct</label>
-				<input type="checkbox" id="dir1" name="dir1" checked/>
-				<br/>
-			</div>
-			
-			<div class="formPart"><!-- Deuxième symbole -->
-				<label for="cbSymb2" class="titre">Deuxième symbole</label>
-				<input type="checkbox" name="cbSymb2" id="cbSymb2" checked/>
-				<br/>
-				<div id="divSymb2">
-					<label for="typeCouleur2">Couleur : </label>
-					<br/>
-					<select id="typeCouleur2">
-						<option value="rand">(Pseudo-)aléatoire</option>
-						<option value="col">Constante</option>
-						<option value="rainbow">Arc-en-ciel</option>
-						<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
-					</select>
-					<br/>
-					<div id="divValCouleur2" style="display:none">
-						<label for="valCouleur2">Valeur : </label>
-						<input type="color" name="valCouleur" id="valCouleur2" disabled="true" value="#ffc0cb"/>
-					</div>
-					<br/>
-					<label for="dir2">Sens direct : </label>
-					<input type="checkbox" id="dir2" name="dir2"/>
-					<br/>
-					<label for="phi2" title="En rad, par rapport au premier">Déphasage : </label>
-					<br/>
-					<input type="number" id="phi2" name="phi2" min="0" max="6.28" step="0.01" value="0">
-				</div>
-			</div>
-			
 			<div class="formPart"><!-- Position des symboles-->
 				<p class="titre">
 				<img id="imgPos" src="../0-Contenus/FlecheBas.png" alt="v"/>Positions des symboles</p>
 				<div id="divPos">
-					<label for="dirT">Sens direct <img src="../0-Contenus/info.png" alt="info"
-					title="L'angle formé entre la vertical et le centre du second cercle"/></label>
+					<label for="dirT">Sens direct</label>
 					<input type="checkbox" id="dirT" name="dirT" checked/>
 					<br/>
 					<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
 					<br/>
 					<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
 					<br/>
-					<label for="pdCentre">Décentrage \(\alpha\): </label>
-					<br/>
-					<input type="number" id="pdCentre" name="pdCentre" min="0" max="1" step="0.01" value="0.33"/>
-					<br/>
-					<label for="pEspacement" title="En % du rayon des cercles">Écartement des cercles :</label>
+					<label for="pEspacement" title="Le rayon du cercle sur lequel ls centres des symboles sont, en % du rayon des cercles">Rayon :</label>
 					<br/>
 					<input type="number" id="pEspacement" name="pEspacement" value="1.5" min="0" max="2.5" step="0.01"/>
+				</div>
+			</div>
+			
+			<div class="formPart" id="symbDiv"><!-- Symboles -->
+				<p class="titre">Symboles</p>
+				<div class="symb">
+					<img src="../0-Contenus/croix.png" alt="x supprimer le symbole" style="display:none" onclick="closeSymb(this);"/>
+					<br style="display:none"/>
+					<label>Couleur : </label>
+					<br/>
+					<select class='champ' onchange="changeColor(this);bSymbChanged = true;">
+						<option value="rand">(Pseudo-)aléatoire</option>
+						<option value="col">Constante</option>
+						<option value="rainbow">Arc-en-ciel</option>
+						<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
+						<option value="hidden">Invisible</option>
+					</select>
+					<div style="display:none">
+						<label>Valeur : </label>
+						<input type="color" disabled="true" value="#ffc0cb" class='champ' onchange="bSymbChanged = true;"/>
+					</div>
+					<br/>
+					<label title="Sens anti-horaire">Sens direct : </label>
+					<input type="checkbox" class='champ' onchange="bSymbChanged = true;"/>
+					<br/>
+					<label title="En rad, par rapport au premier">Déphasage : </label>
+					<input type="number" min="0" max="6.28" step="0.01" value="0" class='champ' onchange="bSymbChanged = true;"/>
+					<br/>
+				</div>
+			
+				<img src="../0-Contenus/plus.png" alt="+ nouveau symbole" id="newSymb"/>
+				
+				<div class="template" id="symbTemp">
+					<img src="../0-Contenus/croix.png" alt="x supprimer le symbole" onclick="closeSymb(this);"/>
+					<br/>
+					<label>Couleur : </label>
+					<br/>
+					<select class='champ' onchange="changeColor(this);bSymbChanged = true;">
+						<option value="rand">(Pseudo-)aléatoire</option>
+						<option value="col">Constante</option>
+						<option value="rainbow">Arc-en-ciel</option>
+						<option value="blinkingRainbow">Arc-en-ciel clignotant</option>
+						<option value="hidden">Invisible</option>
+					</select>
+					<div style="display:none">
+						<label>Valeur : </label>
+						<input type="color" disabled="true" value="#ffc0cb" class='champ' onchange="bSymbChanged = true;"/>
+					</div>
+					<br/>
+					<label title="Sens anti-horaire">Sens direct : </label>
+					<input type="checkbox" class='champ' onchange="bSymbChanged = true;"/>
+					<br/>
+					<label title="En rad, par rapport au premier">Déphasage : </label>
+					<input type="number" min="0" max="6.28" step="0.01" value="0" class='champ' onchange="bSymbChanged = true;"/>
+					<br/>
 				</div>
 			</div>
 			
@@ -184,9 +191,10 @@
 				</div>
 			</div>
 			
-			<div class="formPart" style="display:none;"><!-- Normalement pas utilisé -->
+			<div class="formPart template"><!-- Normalement pas utilisé -->
 				<p id="testText"></p>
 				<input type="button" value="Click me !" id="testInput"/>
+				<div id="testDiv"></div>
 			</div>
 			
 			<p id="timeExe" title="Normalement 30 ms"></p>
