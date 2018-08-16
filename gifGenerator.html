@@ -6,19 +6,19 @@
 		
 		<title>Colorful Queer</title>
 		
-		<link rel="stylesheet" href="../style.css"/>
+		<link rel="stylesheet" href="0-Codes/style.css"/>
 		
 		<!--jQuery-->
 		<script src="http://code.jquery.com/jquery.js" ></script>
 		<!--MathJax-->
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 		<!--jsgif, by antimatter15-->
-		<script type="text/javascript" src="../1-Modules/LZWEncoder.js"></script>
-		<script type="text/javascript" src="../1-Modules/NeuQuant.js"></script>
-		<script type="text/javascript" src="../1-Modules/GIFEncoder.js"></script>
-		<script type="text/javascript" src="../1-Modules/b64.js"></script>
+		<script type="text/javascript" src="1-Modules/LZWEncoder.js"></script>
+		<script type="text/javascript" src="1-Modules/NeuQuant.js"></script>
+		<script type="text/javascript" src="1-Modules/GIFEncoder.js"></script>
+		<script type="text/javascript" src="1-Modules/b64.js"></script>
 		
-		<script src="queer.js" ></script> 
+		<script src="0-Codes/queer.js" ></script> 
 	</head>
 
 	<body>
@@ -86,7 +86,7 @@
 			
 			<div class="formPart"><!-- Position des symboles-->
 				<p class="titre">
-				<img id="imgPos" src="../0-Contenus/FlecheBas.png" alt="v"/>Positions des symboles</p>
+				<img id="imgPos" src="2-Contenus/FlecheBas.png" alt="v"/>Positions des symboles</p>
 				<div id="divPos">
 					<label for="dirT">Sens direct</label>
 					<input type="checkbox" id="dirT" name="dirT" checked/>
@@ -104,7 +104,7 @@
 			<div class="formPart" id="symbDiv"><!-- Symboles -->
 				<p class="titre">Symboles</p>
 				<div class="symb">
-					<img src="../0-Contenus/croix.png" alt="x supprimer le symbole" style="display:none" onclick="closeSymb(this);"/>
+					<img src="2-Contenus/croix.png" alt="x supprimer le symbole" style="display:none" onclick="closeSymb(this);"/>
 					<br style="display:none"/>
 					<label>Couleur : </label>
 					<br/>
@@ -128,10 +128,10 @@
 					<br/>
 				</div>
 			
-				<img src="../0-Contenus/plus.png" alt="+ nouveau symbole" id="newSymb"/>
+				<img src="2-Contenus/plus.png" alt="+ nouveau symbole" id="newSymb"/>
 				
 				<div class="template" id="symbTemp">
-					<img src="../0-Contenus/croix.png" alt="x supprimer le symbole" onclick="closeSymb(this);"/>
+					<img src="2-Contenus/croix.png" alt="x supprimer le symbole" onclick="closeSymb(this);"/>
 					<br/>
 					<label>Couleur : </label>
 					<br/>
@@ -158,7 +158,7 @@
 			
 			<div class="formPart"><!-- Caractéristiques des symboles -->
 				<p class="titre">
-				<img id="imgPara" src="../0-Contenus/FlecheDroite.png" alt=">"/>
+				<img id="imgPara" src="2-Contenus/FlecheDroite.png" alt=">"/>
 				Paramètres des symboles</p>
 				<div id="divPara" style="display:none;">
 					<label for="epaisseur" title="En px">Epaisseur des traits : </label>
