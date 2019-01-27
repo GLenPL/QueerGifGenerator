@@ -37,8 +37,8 @@
 			l'élément central de la page page, donnant une illusion de mouvment. Losrque le bouton ad hoc est utilisé
 			toutes les frames sont enregistrées une par une (le processus est relativement long et peu facilement
 			prendre plus de 30ms, ce qui explique le ralentissement de l'animation) avant d'être utilisées pour créer 
-			un gif. Pendant l'enregistrement d'un gif, le panneau des paramètres est dsactivé, pour éviter de les 
-			faires varier pendant l'enregistrement. Une fois fini, le gif est téléchargé. Tout est fait localement 
+			un gif. Pendant l'enregistrement d'un gif, le panneau des paramètres est désactivé, pour éviter de les 
+			faires varier pendant l'enregistrement. Une fois fini, le gif est téléchargé et le paramètres sont réactivés. Tout est fait localement 
 			dans le navigateur.</p>
 			<p>Work in progress ...</p>
 		</section>
@@ -60,6 +60,8 @@
 			<input type="number" name="speed" id="speed" min="-5" max="5" step="0.05" value="1"/>
 			<br/>
 			<input type="button" id="0angle" value="Remettre à 0"/>
+			<br/>
+			<input type="button" id="startStop" value="Interrompre l'animation" />
 			</div>
 			
 			<div class="formPart"><!-- Drapeau d'arriere-plan -->
@@ -73,7 +75,7 @@
 				<option value="panAns">Pan</option>
 				<option value="biAns">Bi</option>
 				<option value="intersexAns">Intersex</option>
-				<!--<option value="intersex2Ans">Intersex (another one)</option>-->
+				<option value="intersex2Ans">Intersex (another one)</option>
 				<option value="enbyAns">Enby</option>
 				<option value="aroAns">Aro</option>
 				<option value="aceAns">Ace</option>
