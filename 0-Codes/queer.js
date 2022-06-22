@@ -260,12 +260,12 @@ window.onload = function(){
 		posVisible = !posVisible;
 		
 		if(posVisible){
-			eImgPos.src = "2-Contenus/FlecheBas.png";
+			eImgPos.src = "2-Contenus/flecheBas.png";
 			eImgPos.alt = "v"
 			eDivPos.style.display = '';
 		}
 		else{
-			eImgPos.src = "2-Contenus/FlecheDroite.png";
+			eImgPos.src = "2-Contenus/flecheDroite.png";
 			eImgPos.alt = ">"
 			eDivPos.style.display = 'none';
 		}
