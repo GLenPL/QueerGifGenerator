@@ -1,12 +1,14 @@
-body{
+body {
 	background-color: #f8f8f8;
-	color: #242450;
+  color: #242450;
 }
-h1{
+
+h1 {
 	color: #141440;
 	font-size: 2em;
 }
-#principal{
+
+#principal {
 	border: 1px #242450 solid;
 	border-top: none;
 	border-bottom: none;
@@ -23,17 +25,21 @@ h1{
 	width: 56%;
 	min-width: 50%;
 }
-#principal p{
+
+#principal p {
 	text-align: justify;
 	font-size: em;
-}	
-#principal a:hover{
+}
+
+#principal a:hover {
 	color: #efefef;
 }
-#principal *:hover{
+
+#principal *:hover {
 	color: #545470;
 }
-#menu{
+
+#menu {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -48,7 +54,8 @@ h1{
 	top:15px;
 	left: 15px;
 }
-#choix{
+
+#choix {
 	display: flex;
 	flex-direction: column;
 	align-items:center;
@@ -70,7 +77,8 @@ h1{
 	
 	transition: opacity 0.1s;
 }
-.formPart{
+
+.formPart {
 	border: 2px solid;
 	padding: 5px;
 	margin: 5px;
@@ -84,55 +92,67 @@ h1{
 	border-left: none;
 	border-right: none;
 }
-#choix  div:hover{
+
+#choix  div:hover {
 	background-color:#d0c0f0 ;
 }
+
 .formPart *.titre {
 	padding: 0px;
 	margin:1px;
 	font-size: 1.1em;
 	font-weight:bold;
 }
-.symb{
+
+.symb {
 	border: none;
 	padding: 5px;
 	overflow: auto;
 }
-#choix .symb:hover,.symb div:hover{
+
+#choix .symb:hover,.symb div:hover {
 	background-color:#efefef;
 }
-#choix .symb:nth-child(1n+3){
+
+#choix .symb:nth-child(1n+3) {
 	border-top: 1px #242450 solid;
 }
-#choix .symb:hover{
+
+#choix .symb:hover {
 	border-left:none;
 	border-right:none;
 }
-.formPart img{
+
+.formPart img {
 	float:right;
 	padding: 3px;
 	border:none;
 	background-color:#efefef;
 	margin-top:2px;
 }
-.formPart img:hover{
+
+.formPart img:hover {
 	float:right;
 	padding: 2px;
 	border:1px #242450 solid;
 }
-.template{
+
+.template {
 	display:none;
 }
-#menu a, #menu a:visited{
+
+#menu a, #menu a:visited {
 	border:1px solid;
 	padding: 5px;
 	margin: 5px;
 	color: #242450;
 }
-#menu a:hover{
+
+#menu a:hover {
 	color: #fedcba;
 }
-#info{
+
+#info {
 	position: absolute;
 	bottom:1000px;
 	right:10px;
@@ -145,10 +165,12 @@ h1{
 	opacity:0;
 	transition: bottom 0.5s,opacity 0.5s;
 }
-#info p{
+
+#info p {
 	text-align:justify;
 }
-#chargement{
+
+#chargement {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -156,19 +178,23 @@ h1{
 	
 	background-color: #d0c0f0;
 }
-/*Quelques tags nécessaires*/{
-em{
+
+/*Quelques tags nécessaires*/
+
+em {
 	font-style: italic;
 }
-strong{
+
+strong {
 	font-style: oblique;
 	font-weight: bold;
 }
-mark{
+
+mark {
 	background-color:#fedcba;
 	color:#123456;
 }
-a{
+
+a {
 	color: #202060;
-}
 }
