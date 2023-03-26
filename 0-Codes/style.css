@@ -1,11 +1,19 @@
+:root {
+  --couleur-principale: #d8d8f8;
+  --couleur-gris-clair: #efefef;
+}
+
+.template {
+	display:none;
+}
+
 body {
 	background-color: #f8f8f8;
   color: #242450;
-}
-
-h1 {
-	color: #141440;
-	font-size: 2em;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 #principal {
@@ -13,62 +21,27 @@ h1 {
 	border-top: none;
 	border-bottom: none;
 	padding: 10px;
-	background-color: #efefef;
+	background-color: var(--couleur-gris-clair);
 	
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
 	align-items: center;
 	
-	position: absolute;
-	left: 20%;
-	width: 56%;
-	min-width: 50%;
+	width: 50%;
+	min-width: 35em;
 }
 
-#principal p {
-	text-align: justify;
-	font-size: em;
-}
-
-#principal a:hover {
-	color: #efefef;
-}
-
-#principal *:hover {
-	color: #545470;
-}
-
-#menu {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	align-items: center;
-	
-	background-color:#fedcba;
-	border:1px solid;
-	border-radius: 1px 20px;
-	padding: 5px;
-	
-	position: fixed;
-	top:15px;
-	left: 15px;
-}
-
-#choix {
-	display: flex;
+aside {
+  display: flex;
 	flex-direction: column;
 	align-items:center;
 	flex-wrap : nowrap;
 	
 	height: 95%;
-	width: 18%;
+	max-width: 18%;
 	
-	position: fixed;
-	top: 2%;
-	right: 1%;
-	
-	background-color: #efefef;
+	background-color: var(--couleur-gris-clair);
 	border: 1px solid;
 	border-radius: 10px 1px 1px 10px;
 	margin: 5px;
@@ -79,78 +52,26 @@ h1 {
 }
 
 .formPart {
-	border: 2px solid;
-	padding: 5px;
-	margin: 5px;
-	
 	text-align: center;
 	align-items: center;
 	width: 85%;
-	
-	background-color: #f8f8f8;
-	border: 1px #242450 solid;
-	border-left: none;
-	border-right: none;
 }
 
-#choix  div:hover {
-	background-color:#d0c0f0 ;
-}
-
-.formPart *.titre {
-	padding: 0px;
-	margin:1px;
-	font-size: 1.1em;
-	font-weight:bold;
-}
 
 .symb {
-	border: none;
-	padding: 5px;
 	overflow: auto;
 }
 
-#choix .symb:hover,.symb div:hover {
-	background-color:#efefef;
-}
-
-#choix .symb:nth-child(1n+3) {
+.symb:nth-child(1n+3) {
 	border-top: 1px #242450 solid;
 }
 
-#choix .symb:hover {
-	border-left:none;
-	border-right:none;
+p.icon {
+  width: 1em;
+  height: 1em;
 }
 
-.formPart img {
-	float:right;
-	padding: 3px;
-	border:none;
-	background-color:#efefef;
-	margin-top:2px;
-}
-
-.formPart img:hover {
-	float:right;
-	padding: 2px;
-	border:1px #242450 solid;
-}
-
-.template {
-	display:none;
-}
-
-#menu a, #menu a:visited {
-	border:1px solid;
-	padding: 5px;
-	margin: 5px;
-	color: #242450;
-}
-
-#menu a:hover {
-	color: #fedcba;
-}
+/* Infobox */
 
 #info {
 	position: absolute;
@@ -176,10 +97,48 @@ h1 {
 	left: 0px;
 	z-index:-2;
 	
-	background-color: #d0c0f0;
+	background-color: var(--couleur-principale);
+}
+
+/* Gestion des dropdown */
+/* Inutile : il n'y a pas de dropdown */
+
+input.dropdown {
+  appearance: none;
+}
+
+input.dropdown:not(:checked)::before {
+  content: "\2b07";
+}
+
+input.dropdown:checked::before {
+  content: "\2b06";
+}
+
+
+input.dropdown:checked + div {
+  display: inherit;
+}
+
+input.dropdown:not(:checked) + div {
+  display: none;
 }
 
 /*Quelques tags nécessaires*/
+
+
+p {
+	text-align: justify;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h2 {
+  font-s
+}
 
 em {
 	font-style: italic;
@@ -188,13 +147,4 @@ em {
 strong {
 	font-style: oblique;
 	font-weight: bold;
-}
-
-mark {
-	background-color:#fedcba;
-	color:#123456;
-}
-
-a {
-	color: #202060;
 }

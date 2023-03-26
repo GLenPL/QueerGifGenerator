@@ -73,22 +73,21 @@ window.onload = function(){
 		var chargement = $('#chargement');
 		}
 		
-		{//toutes les constantes et variables uilisées
-		{//constantes du drapeau/arrière-plan
-		var rainbow = ['red','orange','gold','green','blue','purple'];
-		var trans1 = ['lightSkyBlue','pink','white','pink','lightSkyBlue'];
-		var trans2 = ['magenta','orchid','mediumOrchid','darkOrchid','blue'];
-		var pan = ['magenta','gold','skyBlue'];
-		var bi = ['mediumVioletRed','mediumVioletRed','mediumOrchid','blue','blue'];
-		var intersex = ['plum','white','lightBlue','pink','white','plum'];
-		var enby = ['yellow','white','purple','black'];
-		var aro = ['darkGreen','green','yellow','gray','black'];
-		var ace = ['black','grey','white','purple'];
+		//toutes les constantes et variables uilisées
+		//constantes du drapeau/arrière-plan
+		var rainbow = ['red', 'orange', 'gold', 'green', 'blue', 'purple'];
+		var trans1 = ['lightSkyBlue', 'pink', 'white', 'pink', 'lightSkyBlue'];
+		var trans2 = ['magenta', 'orchid', 'mediumOrchid', 'darkOrchid', 'blue'];
+		var pan = ['magenta', 'gold', 'skyBlue'];
+		var bi = ['mediumVioletRed', 'mediumVioletRed', 'mediumOrchid', 'blue', 'blue'];
+		var intersex = ['plum', 'white', 'lightBlue', 'pink', 'white', 'plum'];
+		var enby = ['yellow', 'white', 'purple', 'black'];
+		var aro = ['darkGreen', 'green', 'yellow', 'gray', 'black'];
+		var ace = ['black', 'grey', 'white', 'purple'];
 		
 		var flagInUse = rainbow;
-		}
 		
-		{//contantes et variables des symboles
+		//contantes et variables des symboles
 		//A prpos des input restants à ajouter :
 		var angle = 0;
 		var pi = Math.PI;
@@ -118,22 +117,22 @@ window.onload = function(){
 		//cette variable va contenir l'ensenble de tout les symboles devant être dessinés, autre que le premier.
 		//l'information est sous forme d'array, avec, dans l'ordre :
 		// div du symbole,type couleur, couleur,sens, déphasage1, déphasage2
-		}
 		
-		{//constantes et variables du temps
+		
+		//constantes et variables du temps
 		var timeNew = new Date();
 		var timeOld = new Date();
 		var temps;
-		}
 		
-		{//constantes et variables du gifEncoder
+		
+		//constantes et variables du gifEncoder
 		var recordGif = false;
 		var frameRestantes = 0;
 		var frameTot = 0;
 		var encoder = new GIFEncoder();
 		var msgCount = 0;
-		}
-		}
+		
+		
 		
 		arrierePlan(rainbow,0,context);//si quelquechose plante après, il y a au moins un joli arrière-plan
 		
@@ -242,35 +241,6 @@ window.onload = function(){
 		alert(testTest);
 	}
 	
-	eImgPara.onclick = function(){
-		paraVisible = !paraVisible;
-		
-		if(paraVisible){
-			eImgPara.src = "2-Contenus/flecheBas.png";
-			eImgPara.alt = "v"
-			eDivPara.style.display = '';
-		}
-		else{
-			eImgPara.src = "2-Contenus/flecheDroite.png";
-			eImgPara.alt = ">"
-			eDivPara.style.display = 'none';
-		}
-	}
-	eImgPos.onclick = function(){
-		posVisible = !posVisible;
-		
-		if(posVisible){
-			eImgPos.src = "2-Contenus/flecheBas.png";
-			eImgPos.alt = "v"
-			eDivPos.style.display = '';
-		}
-		else{
-			eImgPos.src = "2-Contenus/flecheDroite.png";
-			eImgPos.alt = ">"
-			eDivPos.style.display = 'none';
-		}
-	}
-	
 	bGif.onclick= function(){//lance l'enregistrement d'un .gif (un tour) avec les parametres actuels (freezés)
 		var speed = eSpeed.value;
 		frameRestantes = Math.round(2*pi/(0.030*Math.abs(speed)));
@@ -296,20 +266,20 @@ window.onload = function(){
 	function animate(){
 	//fonction principale rélisant une frame, son enregistrement si nécessaire et gérant la variable 'angle'
 	//main function : draws one frame, record if necessary and refresh the 'angle' variable
-		{//timer & affichage du temps
+		//timer & affichage du temps
 		temps = timeNew.getTime() - timeOld.getTime();
 		timeExe.innerHTML = 'Temps d\'éxecution : ' + temps + 'ms';
 		
 		timeOld = timeNew;
 		timeNew = new Date();
-		}
 		
-		{//gestion des constantes sur la frame
+		
+		//gestion des constantes sur la frame
 		dtheta = eSpeed.value*0.030;		
 		context.lineJoin = 'bevel';
-		}
 		
-		{//desssin de la frame
+		
+		//desssin de la frame
 		if (refreshed){arrierePlan(flagInUse,angle,context);}
 		
 		var phiRel = 2*pi/qttSymbs;
@@ -322,11 +292,10 @@ window.onload = function(){
 			var cols = couleurFunc(angle,allSymbols[i][0],allSymbols[i][1]);
 			symbole(cxs,cys,angles,context,epaisseur,cols,rCercle,lBarre,aFleche,pFleche,pCroix,pdCroix);
 			eTestText.innerHTML += i;
-			
-		}
 		}
 		
-		{//gestion de l'enregistrement du gif
+		
+		//gestion de l'enregistrement du gif
 		if (frameRestantes > 0){
 			encoder.addFrame(context);
 			frameRestantes --;
@@ -351,7 +320,6 @@ window.onload = function(){
 			console.log('*********');
 			console.log('Le gif a bien été enregistré et téléchargé.');
 			infoMessage('Enregistrement terminé !',3000,false,null,null);
-		}
 		}
 		
 		angle = angle + dtheta;
@@ -510,10 +478,10 @@ window.onload = function(){
 		var aSymbsValeurs = [];
 		for(var i = 0; i < allSymb.length; i++){
 			var elValues = [];
-			elValues.push(nthSibling(allSymb[i].firstChild,5).value);
-			elValues.push(nthSibling(nthSibling(allSymb[i].firstChild,6).firstChild,2).value);
-			elValues.push(nthSibling(allSymb[i].firstChild,9).checked);
-			elValues.push(parseFloat(nthSibling(allSymb[i].firstChild,12).value));
+			elValues.push(nthSibling(allSymb[i].firstChild,3).value);
+			elValues.push(nthSibling(nthSibling(allSymb[i].firstChild,4).firstChild,2).value);
+			elValues.push(nthSibling(allSymb[i].firstChild,6).checked);
+			elValues.push(parseFloat(nthSibling(allSymb[i].firstChild,8).value));
 			aSymbsValeurs.push(elValues);
 		}
 		console.log(aSymbsValeurs);

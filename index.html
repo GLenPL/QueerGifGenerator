@@ -24,15 +24,15 @@
 
 	<body>
 	
-		<aside id="vers-site-parent">
-			<a href="https://glenplonk.fr">Vers le site parent !</a>
+		<aside id="liens">
+			<p>Le parent de ce site est <a href="https://glenplonk.fr">glenplonk.fr</a>.</p>
+			<p>Trouvez moi également sur Mastodon, je suis <a rel="me" href="https://eldritch.cafe/@GLenPLonk">@GLenPLonk@eldritch.cafe</a>.</p>
 		</aside>
 		<section id="principal">
 			<h1>Enjoy !</h1>
 			
 			<h2>Le générateur</h2>
 			<canvas id="canvas1" width="1" height="1"></canvas>
-			<br/>
 			<p>Ce générateur utilise <a href="https://www.mathjax.org/#docs">MathJax</a>, <a href="https://antimatter15.com/project/jsgif/">jsgif</a> et <a href="https://jquery.com/">jQuery</a></p>
 			
 			<h2>Quelques explications</h2>
@@ -44,77 +44,56 @@
 			un gif. Pendant l'enregistrement d'un gif, le panneau des paramètres est désactivé, pour éviter de les 
 			faires varier pendant l'enregistrement. Une fois fini, le gif est téléchargé et les paramètres sont réactivés. Tout est fait localement 
 			dans le navigateur.</p>
-			<p>Trouvez moi sur Mastodon, je suis <a rel="me" href="https://eldritch.cafe/@GLenPLonk">@GLenPLonk@eldritch.cafe</a>.</p>
-			<p>Work in progress ...</p>
+			<p>Remarquez que le code initial est plutôt vieux (environ 25% de mon âge) et que si je refaisais ça aujourd'hui, je ferais pas du tout de la même manière …</p>
 		</section>
 		
 		<aside id="choix">
-					
-					
 			<div class="formPart"><!-- Gif -->
-			<label for="nom">Nom du gif :</label>
-			<br/>
-			<input type="text" name="nom" id="nom" value="myBestGif" />
-			<br/>
-			<input type="button" value="Lancez l'enregistrement !" id="bGif" name="bGif"/>
+			  <label for="nom">Nom du gif :</label>
+			  <input type="text" name="nom" id="nom" value="myBestGif" />
+			  <input type="button" value="Lancez l'enregistrement !" id="bGif" name="bGif"/>
 			</div>
 			
 			<div class="formPart"><!-- Vitesse de rotation -->
-			<label for="speed" title="En rad/s"> Vitesse de rotation : </label>
-			<br/>
-			<input type="number" name="speed" id="speed" min="-5" max="5" step="0.05" value="1"/>
-			<br/>
-			<input type="button" id="0angle" value="Remettre à 0"/>
-			<br/>
-			<input type="button" id="startStop" value="Interrompre l'animation" />
+			  <label for="speed" title="En rad/s"> Vitesse de rotation : </label>
+			  <input type="number" name="speed" id="speed" min="-5" max="5" step="0.05" value="1"/>
+			  <input type="button" id="0angle" value="Remettre à 0"/>
+			  <input type="button" id="startStop" value="Interrompre l'animation" />
 			</div>
 			
 			<div class="formPart"><!-- Drapeau d'arriere-plan -->
-			<p class="titre">Arrière-plan</p>
-			<label for="bgFlag">Drapeau d'arrière-plan :</label>
-			<br/>
-			<select id="bgFlag">
-				<option value="rainbowAns">Rainbow</option>
-				<option value="trans1Ans">Transgender Pride</option>
-				<option value="trans2Ans">Trans (bis)</option>
-				<option value="panAns">Pan</option>
-				<option value="biAns">Bi</option>
-				<option value="intersexAns">Intersex</option>
-				<option value="intersex2Ans">Intersex (another one)</option>
-				<option value="enbyAns">Enby</option>
-				<option value="aroAns">Aro</option>
-				<option value="aceAns">Ace</option>
-				
-			</select>
-			<br/>
-			<label for="refreshed">Rafraichit</label>
-			<input type="checkbox" id="refreshed" name="refreshed" checked/>
+			  <label for="bgFlag">Drapeau d'arrière-plan :</label>
+			  <select id="bgFlag">
+				  <option value="rainbowAns">Rainbow</option>
+				  <option value="trans1Ans">Transgender Pride</option>
+				  <option value="trans2Ans">Trans (bis)</option>
+				  <option value="panAns">Pan</option>
+				  <option value="biAns">Bi</option>
+				  <option value="intersexAns">Intersex</option>
+				  <option value="intersex2Ans">Intersex (another one)</option>
+				  <option value="enbyAns">Enby</option>
+				  <option value="aroAns">Aro</option>
+				  <option value="aceAns">Ace</option>
+			  </select>
+			  <label for="refreshed">Rafraichit</label>
+			  <input type="checkbox" id="refreshed" name="refreshed" checked/>
 			</div>
 			
 			<div class="formPart"><!-- Position des symboles-->
-				<p class="titre">
-				<img id="imgPos" src="2-Contenus/flecheBas.png" alt="v"/>Positions des symboles</p>
 				<div id="divPos">
 					<label for="dirT">Sens direct</label>
 					<input type="checkbox" id="dirT" name="dirT" checked/>
-					<br/>
 					<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
-					<br/>
 					<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
-					<br/>
 					<label for="pEspacement" title="Le rayon du cercle sur lequel ls centres des symboles sont, en % du rayon des cercles">Rayon :</label>
-					<br/>
 					<input type="number" id="pEspacement" name="pEspacement" value="1.5" min="0" max="2.5" step="0.01"/>
 				</div>
 			</div>
 			
 			<div class="formPart" id="symbDiv"><!-- Symboles -->
-				<p class="titre">Symboles</p>
 				<div class="symb">
-					<img src="2-Contenus/croix.png" alt="x supprimer le symbole" style="display:none" onclick="closeSymb(this);"/>
-					<br style="display:none"/>
+					<img src="2-Contenus/croix.png" alt="x supprimer le symbole" style="display:none"/>
 					<label>Couleur : </label>
-					<br/>
 					<select class='champ' onchange="changeColor(this);bSymbChanged = true;">
 						<option value="rand">(Pseudo-)aléatoire</option>
 						<option value="col">Constante</option>
@@ -126,22 +105,17 @@
 						<label>Valeur : </label>
 						<input type="color" disabled="true" value="#ffc0cb" class='champ' onchange="bSymbChanged = true;"/>
 					</div>
-					<br/>
 					<label title="Sens anti-horaire">Sens direct : </label>
 					<input type="checkbox" class='champ' onchange="bSymbChanged = true;"/>
-					<br/>
 					<label title="En rad, par rapport au premier">Déphasage : </label>
 					<input type="number" min="0" max="6.28" step="0.01" value="0" class='champ' onchange="bSymbChanged = true;"/>
-					<br/>
 				</div>
 			
-				<img src="2-Contenus/plus.png" alt="+ nouveau symbole" id="newSymb"/>
+				<p id="newSymb" class="icon">➕</p>
 				
 				<div class="template" id="symbTemp">
-					<img src="2-Contenus/croix.png" alt="x supprimer le symbole" onclick="closeSymb(this);"/>
-					<br/>
+					<p onclick="closeSymb(this);" class="icon">❌</p>
 					<label>Couleur : </label>
-					<br/>
 					<select class='champ' onchange="changeColor(this);bSymbChanged = true;">
 						<option value="rand">(Pseudo-)aléatoire</option>
 						<option value="col">Constante</option>
@@ -153,47 +127,28 @@
 						<label>Valeur : </label>
 						<input type="color" disabled="true" value="#ffc0cb" class='champ' onchange="bSymbChanged = true;"/>
 					</div>
-					<br/>
 					<label title="Sens anti-horaire">Sens direct : </label>
 					<input type="checkbox" class='champ' onchange="bSymbChanged = true;"/>
-					<br/>
 					<label title="En rad, par rapport au premier">Déphasage : </label>
 					<input type="number" min="0" max="6.28" step="0.01" value="0" class='champ' onchange="bSymbChanged = true;"/>
-					<br/>
 				</div>
 			</div>
 			
 			<div class="formPart"><!-- Caractéristiques des symboles -->
-				<p class="titre">
-				<img id="imgPara" src="2-Contenus/flecheDroite.png" alt=">"/>
-				Paramètres des symboles</p>
-				<div id="divPara" style="display:none;">
+				<div id="divPara">
 					<label for="epaisseur" title="En px">Epaisseur des traits : </label>
-					<br/>
 					<input type="number" name="epaisseur" id="epaisseur" value="10" min="1" max="50"/>
-					<br/>
 					<label for="rCercle" title="En px ">Rayon des cercles :</label>
-					<br/>
 					<input type="number" id="rCercle" name="rCercle" value="40" min="0" max="60"/>
-					<br/>
 					<label for="lBarre" title="En px">Longueur des barres :</label>
-					<br/>
 					<input type="number" id="lBarre" name="lBarre" value="100" min="0" max="150"/>
-					<br/>
 					<label for="aFleche" title="En rad">Angle des flèches :</label>
-					<br/>
 					<input type="number" id="aFleche" name="aFleche" value="1.83" min="0" max="3.14" step="0.01"/>
-					<br/>
 					<label for="pFleche" title="En % de la taille de la barre">Taille des flèches :</label>
-					<br/>
 					<input type="number" id="pFleche" name="pFleche" value="0.5" min="0" max="1" step="0.01"/>
-					<br/>
 					<label for="pdCroix" title="En % de la taille de la barre">Hauteur des croix :</label>
-					<br/>
 					<input type="number" id="pdCroix" name="pdCroix" value="0.5" min="0" max="1" step="0.01"/>
-					<br/>
 					<label for="pCroix" title="En % de la taille de la barre">Largeur des croix :</label>
-					<br/>
 					<input type="number" id="pCroix" name="pCroix" value="0.5" min="0" max="1" step="0.01"/>
 				</div>
 			</div>
