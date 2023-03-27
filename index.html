@@ -23,7 +23,7 @@
 	</head>
 
 	<body>
-	
+	  <input type="checkbox" class="dropdown" checked/>
 		<aside id="liens">
 			<p>Le parent de ce site est <a href="https://glenplonk.fr">glenplonk.fr</a>.</p>
 			<p>Trouvez moi également sur Mastodon, je suis <a rel="me" href="https://eldritch.cafe/@GLenPLonk">@GLenPLonk@eldritch.cafe</a>.</p>
@@ -80,17 +80,17 @@
 			</div>
 			
 			<div class="formPart"><!-- Position des symboles-->
-				<div id="divPos">
-					<label for="dirT">Sens direct</label>
-					<input type="checkbox" id="dirT" name="dirT" checked/>
-					<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
-					<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
-					<label for="pEspacement" title="Le rayon du cercle sur lequel ls centres des symboles sont, en % du rayon des cercles">Rayon :</label>
-					<input type="number" id="pEspacement" name="pEspacement" value="1.5" min="0" max="2.5" step="0.01"/>
-				</div>
+				<label for="dirT">Sens direct</label>
+				<input type="checkbox" id="dirT" name="dirT" checked/>
+				<label for="phiT" title="En rad">Déphasage \( \varphi_t \): </label>
+				<input type="number" id="phiT" name="phiT" min="0" max="6.28" step="0.01" value="0">
+				<label for="pEspacement" title="Le rayon du cercle sur lequel ls centres des symboles sont, en % du rayon des cercles">Rayon :</label>
+				<input type="number" id="pEspacement" name="pEspacement" value="1.5" min="0" max="2.5" step="0.01"/>
 			</div>
 			
-			<div class="formPart" id="symbDiv"><!-- Symboles -->
+		<div class="formPart">
+	  <input type="checkbox" class="small dropdown" checked title="Ajouter, retirer, modifier, … des symboles"/>
+			<div id="symbDiv"><!-- Symboles -->
 				<div class="symb">
 					<img src="2-Contenus/croix.png" alt="x supprimer le symbole" style="display:none"/>
 					<label>Couleur : </label>
@@ -133,24 +133,23 @@
 					<input type="number" min="0" max="6.28" step="0.01" value="0" class='champ' onchange="bSymbChanged = true;"/>
 				</div>
 			</div>
+			</div>
 			
 			<div class="formPart"><!-- Caractéristiques des symboles -->
-				<div id="divPara">
-					<label for="epaisseur" title="En px">Epaisseur des traits : </label>
-					<input type="number" name="epaisseur" id="epaisseur" value="10" min="1" max="50"/>
-					<label for="rCercle" title="En px ">Rayon des cercles :</label>
-					<input type="number" id="rCercle" name="rCercle" value="40" min="0" max="60"/>
-					<label for="lBarre" title="En px">Longueur des barres :</label>
-					<input type="number" id="lBarre" name="lBarre" value="100" min="0" max="150"/>
-					<label for="aFleche" title="En rad">Angle des flèches :</label>
-					<input type="number" id="aFleche" name="aFleche" value="1.83" min="0" max="3.14" step="0.01"/>
-					<label for="pFleche" title="En % de la taille de la barre">Taille des flèches :</label>
-					<input type="number" id="pFleche" name="pFleche" value="0.5" min="0" max="1" step="0.01"/>
-					<label for="pdCroix" title="En % de la taille de la barre">Hauteur des croix :</label>
-					<input type="number" id="pdCroix" name="pdCroix" value="0.5" min="0" max="1" step="0.01"/>
-					<label for="pCroix" title="En % de la taille de la barre">Largeur des croix :</label>
-					<input type="number" id="pCroix" name="pCroix" value="0.5" min="0" max="1" step="0.01"/>
-				</div>
+				<label for="epaisseur" title="En px">Epaisseur des traits : </label>
+				<input type="number" name="epaisseur" id="epaisseur" value="10" min="1" max="50"/>
+				<label for="rCercle" title="En px ">Rayon des cercles :</label>
+				<input type="number" id="rCercle" name="rCercle" value="40" min="0" max="60"/>
+				<label for="lBarre" title="En px">Longueur des barres :</label>
+				<input type="number" id="lBarre" name="lBarre" value="100" min="0" max="150"/>
+				<label for="aFleche" title="En rad">Angle des flèches :</label>
+				<input type="number" id="aFleche" name="aFleche" value="1.83" min="0" max="3.14" step="0.01"/>
+				<label for="pFleche" title="En % de la taille de la barre">Taille des flèches :</label>
+				<input type="number" id="pFleche" name="pFleche" value="0.5" min="0" max="1" step="0.01"/>
+				<label for="pdCroix" title="En % de la taille de la barre">Hauteur des croix :</label>
+				<input type="number" id="pdCroix" name="pdCroix" value="0.5" min="0" max="1" step="0.01"/>
+				<label for="pCroix" title="En % de la taille de la barre">Largeur des croix :</label>
+				<input type="number" id="pCroix" name="pCroix" value="0.5" min="0" max="1" step="0.01"/>
 			</div>
 			
 			<div class="formPart template"><!-- Normalement pas utilisé -->
