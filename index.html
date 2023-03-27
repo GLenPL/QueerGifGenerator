@@ -33,17 +33,11 @@
 			
 			<h2>Le générateur</h2>
 			<canvas id="canvas1" width="1" height="1"></canvas>
-			<p>Ce générateur utilise <a href="https://www.mathjax.org/#docs">MathJax</a>, <a href="https://antimatter15.com/project/jsgif/">jsgif</a> et <a href="https://jquery.com/">jQuery</a></p>
 			
 			<h2>Quelques explications</h2>
-			<p>Tous les sripts de cette page sont codés en javascript et accesible
-			<a href="https://github.com/GLenPL/Queer">ici</a>. Un code dessine toute les 30 millisecondes sur 
-			l'élément central de la page page, donnant une illusion de mouvment. Losrque le bouton ad hoc est utilisé
-			toutes les frames sont enregistrées une par une (le processus est relativement long et peu facilement
-			prendre plus de 30ms, ce qui explique le ralentissement de l'animation) avant d'être utilisées pour créer 
-			un gif. Pendant l'enregistrement d'un gif, le panneau des paramètres est désactivé, pour éviter de les 
-			faires varier pendant l'enregistrement. Une fois fini, le gif est téléchargé et les paramètres sont réactivés. Tout est fait localement 
-			dans le navigateur.</p>
+			<p>Tous les scripts de cette page sont codés en javascript et accesibles <a href="https://github.com/GLenPL/QueerGifGenerator">ici</a>. Un code dessine toute les 30 millisecondes sur l'élément central (un canvas) de la page, donnant une illusion de mouvement. Losrque le bouton ad hoc est cliqué, toutes les frames sont enregistrées une par une (le processus est relativement long et peu facilement prendre plus de 30ms, ce qui explique le ralentissement de l'animation) avant d'être utilisées pour créer un gif.</p>
+			<p>Pendant l'enregistrement d'un gif, le panneau des paramètres est désactivé, pour éviter de les faire varier pendant la création. Une fois fini, le gif est téléchargé et le panneau des paramètres réapparait. Tout est fait localement dans le navigateur.</p>
+			<p>Ce générateur utilise les modules <a href="https://www.mathjax.org/#docs">MathJax</a>, <a href="https://antimatter15.com/project/jsgif/">jsgif</a> et <a href="https://jquery.com/">jQuery</a></p>
 			<p>Remarquez que le code initial est plutôt vieux (environ 25% de mon âge) et que si je refaisais ça aujourd'hui, je ferais pas du tout de la même manière …</p>
 		</section>
 		
@@ -88,9 +82,28 @@
 				<input type="number" id="pEspacement" name="pEspacement" value="1.5" min="0" max="2.5" step="0.01"/>
 			</div>
 			
-		<div class="formPart">
-	  <input type="checkbox" class="small dropdown" checked title="Ajouter, retirer, modifier, … des symboles"/>
-			<div id="symbDiv"><!-- Symboles -->
+		
+			
+			<div class="formPart"><!-- Caractéristiques des symboles -->
+				<label for="epaisseur" title="En px">Epaisseur des traits : </label>
+				<input type="number" name="epaisseur" id="epaisseur" value="10" min="1" max="50"/>
+				<label for="rCercle" title="En px ">Rayon des cercles :</label>
+				<input type="number" id="rCercle" name="rCercle" value="40" min="0" max="60"/>
+				<label for="lBarre" title="En px">Longueur des barres :</label>
+				<input type="number" id="lBarre" name="lBarre" value="100" min="0" max="150"/>
+				<label for="aFleche" title="En rad">Angle des flèches :</label>
+				<input type="number" id="aFleche" name="aFleche" value="1.83" min="0" max="3.14" step="0.01"/>
+				<label for="pFleche" title="En % de la taille de la barre">Taille des flèches :</label>
+				<input type="number" id="pFleche" name="pFleche" value="0.5" min="0" max="1" step="0.01"/>
+				<label for="pdCroix" title="En % de la taille de la barre">Hauteur des croix :</label>
+				<input type="number" id="pdCroix" name="pdCroix" value="0.5" min="0" max="1" step="0.01"/>
+				<label for="pCroix" title="En % de la taille de la barre">Largeur des croix :</label>
+				<input type="number" id="pCroix" name="pCroix" value="0.5" min="0" max="1" step="0.01"/>
+			</div>
+			
+			<div class="formPart"><!-- Symboles -->
+	    <input type="checkbox" class="small dropdown" checked title="Ajouter, retirer, modifier, … des symboles"/>
+			<div id="symbDiv">
 				<div class="symb">
 					<img src="2-Contenus/croix.png" alt="x supprimer le symbole" style="display:none"/>
 					<label>Couleur : </label>
@@ -133,23 +146,6 @@
 					<input type="number" min="0" max="6.28" step="0.01" value="0" class='champ' onchange="bSymbChanged = true;"/>
 				</div>
 			</div>
-			</div>
-			
-			<div class="formPart"><!-- Caractéristiques des symboles -->
-				<label for="epaisseur" title="En px">Epaisseur des traits : </label>
-				<input type="number" name="epaisseur" id="epaisseur" value="10" min="1" max="50"/>
-				<label for="rCercle" title="En px ">Rayon des cercles :</label>
-				<input type="number" id="rCercle" name="rCercle" value="40" min="0" max="60"/>
-				<label for="lBarre" title="En px">Longueur des barres :</label>
-				<input type="number" id="lBarre" name="lBarre" value="100" min="0" max="150"/>
-				<label for="aFleche" title="En rad">Angle des flèches :</label>
-				<input type="number" id="aFleche" name="aFleche" value="1.83" min="0" max="3.14" step="0.01"/>
-				<label for="pFleche" title="En % de la taille de la barre">Taille des flèches :</label>
-				<input type="number" id="pFleche" name="pFleche" value="0.5" min="0" max="1" step="0.01"/>
-				<label for="pdCroix" title="En % de la taille de la barre">Hauteur des croix :</label>
-				<input type="number" id="pdCroix" name="pdCroix" value="0.5" min="0" max="1" step="0.01"/>
-				<label for="pCroix" title="En % de la taille de la barre">Largeur des croix :</label>
-				<input type="number" id="pCroix" name="pCroix" value="0.5" min="0" max="1" step="0.01"/>
 			</div>
 			
 			<div class="formPart template"><!-- Normalement pas utilisé -->

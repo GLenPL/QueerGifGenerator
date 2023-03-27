@@ -157,16 +157,6 @@ h2 {
   font-s
 }
 
-em {
-	font-style: italic;
-}
-
-strong {
-	font-style: oblique;
-	font-weight: bold;
-}
-
-
 .template {
 	display:none;
 }
